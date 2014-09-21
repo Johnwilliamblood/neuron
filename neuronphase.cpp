@@ -4,7 +4,7 @@
 using namespace std;
 //declare variable
 //
-int keep_going=0;
+int keep_going=1;
 //begin.
 int main()
 {
