@@ -3,6 +3,7 @@
 #include "neuron.h"
 using namespace std;
 //declare variable
+//
 int keep_going=0;
 //begin.
 int main()
