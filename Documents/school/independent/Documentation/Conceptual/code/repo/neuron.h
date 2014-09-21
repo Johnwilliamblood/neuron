@@ -43,7 +43,7 @@ const int pumprate = 0;
 //How many ions leak through 
 const int leakrate = 5;
 //Neuron structure. Each neuron gets an id number, stores the ion level, if it fired, and gates open 
-const int Time = 1;
+const int Time = 2;
 //default speed, declare direction variable
 long  speeda=200, speedb=200, DIRECTION;
 
