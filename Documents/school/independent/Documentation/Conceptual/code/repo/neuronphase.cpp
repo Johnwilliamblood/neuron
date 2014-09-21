@@ -4,10 +4,12 @@
 using namespace std;
 //declare variable
 int keep_going=0;
-//begin.
+//begin
 int main()
 {
+	//setup arduino
 	void setup();
+	//setup neuron array
 	initneurons();
 	//Loop that stays active
 	while (keep_going<Time)
