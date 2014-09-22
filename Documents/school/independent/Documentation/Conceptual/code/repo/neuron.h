@@ -70,6 +70,7 @@ void fire();
 void init_neuron_data();
 void neuron(int& i);
 void check(int& i);
+void setconcentration(int& i);
 void synapses();
 void initneurons();
 //setup arduino
@@ -142,6 +143,8 @@ void init_neuron_data()
 		mydata.neuron[i].fire=0;
 		mydata.neuron[i].gates=0;
 	}
+	//set resting potential
+	initneurons();
 }
 
 
@@ -151,18 +154,22 @@ void init_neuron_data()
 //simulates the sodium potasium pump in the current (i) neuron
 void neuron(int& i)
 {
-
+	setconcentration(i);
 	//S-P pump
 	pump(i);
 
 	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
 
-	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);	
+	
 
 }
 
+void setconcentration(int& i)
+{
+	//set new concentration based on number of open gates
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);
+}
 
 //manage ion gates manage dendrite's connection
 void synapses()

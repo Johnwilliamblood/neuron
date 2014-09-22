@@ -27,7 +27,6 @@ long DIRECTION, speeda, speedb;
 int front, back;
 //initialize pins 
 void setup() {
-  Serial.begin(9600);
   //Setup Motor A
   pinMode(12, OUTPUT); //Initiates Motor Channel A pin
   pinMode(9, OUTPUT); //Initiates Brake Channel A pin
