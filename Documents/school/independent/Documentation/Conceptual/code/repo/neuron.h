@@ -173,9 +173,9 @@ void synapses(int& i)
 {
 		//sensor input
 		//front right
-		mydata.neuron[4].gates=(rand()%10)+30;
+		mydata.neuron[4].gates=(rand()%10)-5;
 		//front left
-		mydata.neuron[5].gates=(rand()%10)-5;
+		mydata.neuron[5].gates=(rand()%10)+30;
 		//back right
 		mydata.neuron[6].gates=(rand()%10)-10;
 		//back left
