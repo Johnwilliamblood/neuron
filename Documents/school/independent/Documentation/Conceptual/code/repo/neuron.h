@@ -357,13 +357,23 @@ void ping()
 	cm3=0;
 	cm4=0; 
 	ch= getch();
-	switch (ch)
+	if(ch==KEY_LEFT)
 	{
-		case KEY_UP : cm1=20; break;
-		case KEY_DOWN : cm2=20; break;
-		case KEY_RIGHT : cm3=20; break;
-		case KEY_LEFT : cm4=20; break;
+		cm3=20;
 	}
+		if(ch==KEY_RIGHT)
+	{
+		cm3=20;
+	}
+	if(ch==KEY_UP)
+	{
+		cm3=20;
+	}
+		if(ch==KEY_DOWN)
+	{
+		cm3=20;
+	}
+
 	cout<<"cm1:"<<cm1<<" cm2:"<<cm2<<" cm3:"<<cm3<< " cm4:"<< cm4<<endl;
 
 /*Arduino specific, g++ doesn't understand
