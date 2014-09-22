@@ -3,7 +3,6 @@
 #include "neuron.h"
 #include <stdlib.h>
 using namespace std;
-
 //begin
 int main()
 {
@@ -18,7 +17,7 @@ int main()
 		//connections betweeen neurons
 		synapses();
 		//calculate the state of each neuron
-		for (int i=0;i<number_of_neurons;i++)
+		for (int i=0;i<(number_of_neurons+1);i++)
 		{
 			neuron(i);
 		}
