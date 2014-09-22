@@ -157,15 +157,12 @@ void neuron(int& i)
 {
 	//connections betweeen neurons
 	synapses(i);
+
 	//S-P pump
 	pump(i);
 
-	/*check to see if current neuron reached action potential if so, save to mydata fire 
-	concentration for this cycle not yet set, only the gates so this checks if it fired 
-	during the last 
-	*/
+	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
-
 
 	//set new concentration based on number of open gates
 	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);	
@@ -177,7 +174,7 @@ void synapses(int& i)
 {
 		//sensor input
 		//front right
-		mydata.neuron[4].gates=(rand()%10);
+		mydata.neuron[4].gates=(rand()%10)+15;
 		//front left
 		mydata.neuron[5].gates=(rand()%10)+10;
 		//back right
