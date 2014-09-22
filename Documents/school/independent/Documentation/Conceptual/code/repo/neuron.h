@@ -191,7 +191,7 @@ void synapses()
 		mydata.neuron[7].gates=(rand()%10);
 
 		//front center
-		mydata.neuron[8].gates=(rand()%10)+30;
+		mydata.neuron[8].gates=(rand()%10)+10;
 		//back center
 		mydata.neuron[9].gates=(rand()%10);
 
@@ -204,14 +204,14 @@ void synapses()
 ------------------------------------------------------------------------------------------
 
 		Direction neuron forward, inhibits sensor neurons in rear. */
-		if (mydata.neuron[0].fire==1)
+		if (DIRECTION==0)
 		{
 			mydata.neuron[6].gates=0;
 			mydata.neuron[7].gates=0;
 		}		
 
 		//Direction neuron reverse, inhibits sensor neurons in front.
-		if (mydata.neuron[1].fire==1)
+		if (DIRECTION=1)
 		{
 			mydata.neuron[4].gates=0;
 			mydata.neuron[5].gates=0;
