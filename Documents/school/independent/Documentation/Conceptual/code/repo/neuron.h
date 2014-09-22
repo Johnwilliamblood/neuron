@@ -185,7 +185,7 @@ void synapses(int& i)
 		*/
 
 		//front right
-		mydata.neuron[4].gates=(rand()%10)+7;
+		mydata.neuron[4].gates=(rand()%10)+15;
 		//front left
 		mydata.neuron[5].gates=(rand()%10);
 		//back right
@@ -196,7 +196,7 @@ void synapses(int& i)
 		//front center
 		mydata.neuron[8].gates=(rand()%10);
 		//back center
-		mydata.neuron[9].gates=(rand()%10)+10;
+		mydata.neuron[9].gates=(rand()%10);
 
 
 
@@ -453,7 +453,7 @@ void fire()
 	//Speed pulse rate interpreter 
 	if(mydata.neuron[2].fire==1)
 	{
-		if(speeda<245) {speeda++;}
+		if(speeda<245) {speeda=speeda+5;}
 	}
 	if(mydata.neuron[2].fire==0)
 	{
@@ -465,7 +465,7 @@ void fire()
 	//Speed pulse rate interpreter
 	if(mydata.neuron[3].fire==1)
 	{
-		if(speedb<245) {speedb++;}
+		if(speedb<245) {speedb=speedb+5;}
 	}
 	if(mydata.neuron[3].fire==0)
 	{
