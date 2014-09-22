@@ -5,8 +5,7 @@
 #include <unistd.h>
 #include <ncurses.h>
 using namespace std;
-//declare variable
-int keep_going=0;
+
 //begin
 int main()
 {
@@ -15,7 +14,7 @@ int main()
 	//setup neuron array
 	initneurons();
 	//Loop that stays active
-	while (keep_going<Time)
+	while (1)
 	{	
 		ping();
 		//calculate the state of each neuron
