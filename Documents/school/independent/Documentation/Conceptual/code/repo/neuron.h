@@ -211,7 +211,7 @@ void synapses()
 		}		
 
 		//Direction neuron reverse, inhibits sensor neurons in front.
-		if (DIRECTION=1)
+		if (DIRECTION==1)
 		{
 			mydata.neuron[4].gates=0;
 			mydata.neuron[5].gates=0;
