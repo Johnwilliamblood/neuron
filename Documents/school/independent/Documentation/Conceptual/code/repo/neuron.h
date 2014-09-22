@@ -290,6 +290,10 @@ void pump(int& i)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration-leakrate;
 	}
+	if (mydata.neuron[i].concentration>100)
+	{
+		mydata.neuron[i].concentration=hyperpolarized;
+	}
 }
 
 
