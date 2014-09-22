@@ -17,7 +17,7 @@ int main()
 	//Loop that stays active
 	while (keep_going<Time)
 	{	
-	//	ping();
+		ping();
 		//calculate the state of each neuron
 		for (int i=0;i<number_of_neurons;i++)
 		{
