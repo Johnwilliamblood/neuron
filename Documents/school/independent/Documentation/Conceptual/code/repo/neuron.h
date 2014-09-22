@@ -3,10 +3,8 @@ It requires the use of synapses.h and action.h
 */
 //libraries
 #include <iostream>
-#include <stdlib.h>
+#include <stdlib.h>     
 #include <time.h> 
-#include <unistd.h>
-#include <ncurses.h>
 using namespace std;
 
 
@@ -29,9 +27,6 @@ int echoPin5 = 31;
 //sensor 6
 int pingPin6 = 32;
 int echoPin6 = 33;
-
-//store key value
-int ch;
 
 //store distances
 long cm1, cm2, cm3, cm4, cm5, cm6;
@@ -190,18 +185,18 @@ void synapses(int& i)
 		*/
 
 		//front right
-		mydata.neuron[4].gates=(rand()%10)+cm3;
+		mydata.neuron[4].gates=(rand()%10)+15;
 		//front left
-		mydata.neuron[5].gates=(rand()%10)+cm4;
+		mydata.neuron[5].gates=(rand()%10)+10;
 		//back right
-		mydata.neuron[6].gates=(rand()%10)+cm3;
+		mydata.neuron[6].gates=(rand()%10)+5;
 		//back left
-		mydata.neuron[7].gates=(rand()%10)+cm4;
+		mydata.neuron[7].gates=(rand()%10)-5;
 
 		//front center
-		mydata.neuron[8].gates=(rand()%10)+cm1;
+		mydata.neuron[8].gates=(rand()%10)+30;
 		//back center
-		mydata.neuron[9].gates=(rand()%10)+cm2;
+		mydata.neuron[9].gates=(rand()%10)-10;
 
 
 
@@ -351,31 +346,6 @@ ping function*/
 
 void ping()
 {
-	//read arrow key.
-	cm1=0;
-	cm2=0;
-	cm3=0;
-	cm4=0; 
-	ch= getch();
-	if(ch==KEY_LEFT)
-	{
-		cm3=20;
-	}
-		if(ch==KEY_RIGHT)
-	{
-		cm3=20;
-	}
-	if(ch==KEY_UP)
-	{
-		cm3=20;
-	}
-		if(ch==KEY_DOWN)
-	{
-		cm3=20;
-	}
-
-	cout<<"cm1:"<<cm1<<" cm2:"<<cm2<<" cm3:"<<cm3<< " cm4:"<< cm4<<endl;
-
 /*Arduino specific, g++ doesn't understand
 
 //variables 
