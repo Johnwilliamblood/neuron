@@ -316,7 +316,7 @@ void check(int& i)
 	if (mydata.neuron[i].concentration<threshold)
 	{
 		mydata.neuron[i].fire = 1;	
-		cout<<"neuron "<<i<<" fired, charge:-"<< mydata.neuron[i].concentration<<endl;
+		cout<<"neuron "<<i<<" fired! charge:-"<< mydata.neuron[i].concentration<<endl;
 		mydata.neuron[i].concentration=hyperpolarized;
 	}
 
