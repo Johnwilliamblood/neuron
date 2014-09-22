@@ -70,6 +70,7 @@ typedef struct _mydata
 void fire();	
 void init_neuron_data();
 void neuron(int& i);
+void setconc(int& i);
 void check(int& i);
 void synapses(int& i);
 void initneurons();
@@ -159,13 +160,11 @@ void neuron(int& i)
 	synapses(i);
 	//S-P pump
 	pump(i);
+
 	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
-
-
 	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);	
-}
+	}
 
 
 //manage ion gates manage dendrite's connection
@@ -318,6 +317,10 @@ void check(int& i)
 }
 
 
+void setconc(int& i)
+{
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);	
+}
 
 
 
@@ -325,11 +328,7 @@ void check(int& i)
 
 
 
-
-
-/*Functions
------------------------------------------------------------------------------------------
-
+/*
 ping function*/
 
 void ping()

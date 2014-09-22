@@ -21,6 +21,20 @@ int main()
 			neuron(i);
 		}
 
+		for (int i=0;i<number_of_neurons;i++)
+		{
+			check(i);	
+		}
+
+		for (int i=0;i<number_of_neurons;i++)
+		{
+			setconc(i);
+		}
+		//check to see if current neuron reached action potential if so, save to mydata fire 
+
+
+		
+
 			
 	
 		//fire all active neurons
