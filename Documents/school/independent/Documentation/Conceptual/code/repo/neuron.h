@@ -172,7 +172,18 @@ void neuron(int& i)
 //manage ion gates manage dendrite's connection
 void synapses(int& i)
 {
-		//sensor input
+		/*sensor input
+		These are simulated sensors using random number generators
+		by adding or subtracting to each sensor you can see how the
+		robot would react to different sensory input.
+		The randomness is not needed to do this, but makes the results 
+		more interesting to look at.
+
+		Later on the sensor input will be used and converted into 
+		a number within a reasonable range and replace the random number 
+		generators here. 
+		*/
+
 		//front right
 		mydata.neuron[4].gates=(rand()%10)+15;
 		//front left
