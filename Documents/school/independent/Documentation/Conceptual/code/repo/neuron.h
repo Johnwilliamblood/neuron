@@ -125,7 +125,7 @@ void initneurons()
 	//set up structure 
 	init_neuron_data();
 	//sets all neurons to their resting potential 
-	for (int i=0;i<number_of_neurons;i++)
+	for (int i=0;i<(number_of_neurons+1);i++)
 	{
 		mydata.neuron[i].concentration=resting_potential;
 	}
@@ -139,7 +139,7 @@ void initneurons()
 //function to set each neuron id, set fire status to 0 and gate open status to 0 
 void init_neuron_data()
 {
-	for (int i=0;i<number_of_neurons;i++)
+	for (int i=0;i<(number_of_neurons+1);i++)
 	{ 
 		mydata.neuron[i].id=i;
 		mydata.neuron[i].fire=0;
