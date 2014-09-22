@@ -42,7 +42,7 @@ const int hyperpolarized = 80;
 //How many ions get through each pass the gate is open
 const int pumprate = 2;
 //How many ions leak through 
-const int leakrate = 10;
+const int leakrate = 5;
 //Neuron structure. Each neuron gets an id number, stores the ion level, if it fired, and gates open 
 const int Time = 2;
 //default speed, declare direction variable
