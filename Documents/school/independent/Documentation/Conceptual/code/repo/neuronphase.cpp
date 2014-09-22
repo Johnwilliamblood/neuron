@@ -2,8 +2,6 @@
 #include <iostream>
 #include "neuron.h"
 #include <stdlib.h>
-#include <unistd.h>
-#include <ncurses.h>
 using namespace std;
 
 //begin
