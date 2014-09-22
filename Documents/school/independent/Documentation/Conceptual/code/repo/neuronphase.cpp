@@ -1,6 +1,9 @@
 //Libraries
 #include <iostream>
 #include "neuron.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <ncurses.h>
 using namespace std;
 //declare variable
 int keep_going=0;

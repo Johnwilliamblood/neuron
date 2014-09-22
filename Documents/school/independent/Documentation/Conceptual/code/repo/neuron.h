@@ -5,6 +5,8 @@ It requires the use of synapses.h and action.h
 #include <iostream>
 #include <stdlib.h>     
 #include <time.h> 
+#include <unistd.h>
+#include <ncurses.h>
 using namespace std;
 
 
@@ -27,6 +29,9 @@ int echoPin5 = 31;
 //sensor 6
 int pingPin6 = 32;
 int echoPin6 = 33;
+
+//store key value
+int ch;
 
 //store distances
 long cm1, cm2, cm3, cm4, cm5, cm6;
@@ -346,6 +351,20 @@ ping function*/
 
 void ping()
 {
+	//read arrow key.
+	cm1=0;
+	cm2=0;
+	cm3=0;
+	cm4=0; 
+	ch= getch();
+	switch (ch)
+	{
+		case KEY_UP: cm1=10; break;
+		case KEY_DOWN: cm2=10; break;
+		case KEY_LEFT: cm3=10; break;
+		case KEY_RIGHT:cm4=10; break;
+	}
+
 /*Arduino specific, g++ doesn't understand
 
 //variables 
