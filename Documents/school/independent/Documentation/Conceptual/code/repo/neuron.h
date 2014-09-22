@@ -206,15 +206,15 @@ void synapses()
 		Direction neuron forward, inhibits sensor neurons in rear. */
 		if (mydata.neuron[0].fire==1)
 		{
-			mydata.neuron[6].gates=mydata.neuron[6].gates=0;
-			mydata.neuron[7].gates=mydata.neuron[7].gates=0;
+			mydata.neuron[6].gates=0;
+			mydata.neuron[7].gates=0;
 		}		
 
 		//Direction neuron reverse, inhibits sensor neurons in front.
 		if (mydata.neuron[1].fire==1)
 		{
-			mydata.neuron[4].gates=mydata.neuron[4].gates=0;
-			mydata.neuron[5].gates=mydata.neuron[5].gates=0;
+			mydata.neuron[4].gates=0;
+			mydata.neuron[5].gates=0;
 		}
 
 
