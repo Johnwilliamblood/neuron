@@ -264,7 +264,7 @@ void synapses(int& i)
 		if (mydata.neuron[8].fire==1)
 		{
 			mydata.neuron[0].gates=mydata.neuron[0].gates+10;
-			mydata.neuron[1].gates=mydata.neuron[1].gates-10;
+			mydata.neuron[1].gates=mydata.neuron[1].gates-1;
 		}
 
 
@@ -274,7 +274,7 @@ void synapses(int& i)
 		if (mydata.neuron[9].fire==1)
 		{
 			mydata.neuron[1].gates=mydata.neuron[1].gates+10;
-			mydata.neuron[0].gates=mydata.neuron[0].gates-10;
+			mydata.neuron[0].gates=mydata.neuron[0].gates-1;
 		}
 }
 
