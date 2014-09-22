@@ -33,7 +33,7 @@ long cm1, cm2, cm3, cm4, cm5, cm6;
 
 
 //neuron info
-const int number_of_neurons = 10;
+const int number_of_neurons = 9;
 //the neuron's resting potential -80mv is just 80 for simplicity 
 const int resting_potential = 70;
 //The threshold needed for an action potential 
