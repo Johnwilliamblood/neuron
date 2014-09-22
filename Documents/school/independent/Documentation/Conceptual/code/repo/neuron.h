@@ -70,7 +70,7 @@ void fire();
 void init_neuron_data();
 void neuron(int& i);
 void check(int& i);
-void synapses(int& i);
+void synapses();
 void initneurons();
 //setup arduino
 void setup();
@@ -154,8 +154,6 @@ void init_neuron_data()
 //simulates the sodium potasium pump in the current (i) neuron
 void neuron(int& i)
 {
-	//connections betweeen neurons
-	synapses(i);
 
 	//S-P pump
 	pump(i);
@@ -169,7 +167,7 @@ void neuron(int& i)
 
 
 //manage ion gates manage dendrite's connection
-void synapses(int& i)
+void synapses()
 {
 		/*sensor input
 		These are simulated sensors using random number generators
