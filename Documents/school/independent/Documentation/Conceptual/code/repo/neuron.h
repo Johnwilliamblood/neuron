@@ -185,7 +185,7 @@ void synapses(int& i)
 		*/
 
 		//front right
-		mydata.neuron[4].gates=(rand()%10)+15;
+		mydata.neuron[4].gates=(rand()%10)+5;
 		//front left
 		mydata.neuron[5].gates=(rand()%10);
 		//back right
