@@ -42,7 +42,7 @@ const int hyperpolarized = 80;
 //How many ions get through each pass the gate is open
 const int pumprate = 2;
 //How many ions leak through 
-const int leakrate = 5;
+const int leakrate = 2;
 
 //default speed, declare direction variable
 long  speeda=200, speedb=200, DIRECTION;
