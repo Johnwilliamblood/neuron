@@ -359,11 +359,12 @@ void ping()
 	ch= getch();
 	switch (ch)
 	{
-		case KEY_UP: cm1=10; break;
-		case KEY_DOWN: cm2=10; break;
-		case KEY_LEFT: cm3=10; break;
-		case KEY_RIGHT:cm4=10; break;
+		case KEY_UP: cm1=20; break;
+		case KEY_DOWN: cm2=20; break;
+		case KEY_LEFT: cm3=20; break;
+		case KEY_RIGHT:cm4=20; break;
 	}
+	cout<<"cm1:"<<cm1<<" cm2:"<<cm2<<" cm3:"<<cm3<< " cm4:"<< cm4;
 
 /*Arduino specific, g++ doesn't understand
 
