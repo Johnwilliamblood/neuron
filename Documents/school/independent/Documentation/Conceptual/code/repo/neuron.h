@@ -38,8 +38,9 @@ const int number_of_neurons = 10;
 const int resting_potential = 70;
 //The threshold needed for an action potential 
 const int threshold = 60;
+const int hyperpolarized = 80;
 //How many ions get through each pass the gate is open
-const int pumprate = 0;
+const int pumprate = 2;
 //How many ions leak through 
 const int leakrate = 5;
 //Neuron structure. Each neuron gets an id number, stores the ion level, if it fired, and gates open 
@@ -300,7 +301,7 @@ void check(int& i)
 	{
 		mydata.neuron[i].fire = 1;	
 		cout<<"neuron "<<i<<" fired, concentration:"<< mydata.neuron[i].concentration<<endl;
-		mydata.neuron[i].concentration=resting_potential;
+		mydata.neuron[i].concentration=hyperpolarized;
 	}
 
 	else
