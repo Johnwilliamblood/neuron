@@ -181,19 +181,6 @@ void synapses()
 		generators here. 
 		*/
 
-		//front right
-		mydata.neuron[4].gates=(rand()%10);
-		//front left
-		mydata.neuron[5].gates=(rand()%10)+30;
-		//back right
-		mydata.neuron[6].gates=(rand()%10);
-		//back left
-		mydata.neuron[7].gates=(rand()%10);
-
-		//front center
-		mydata.neuron[8].gates=(rand()%10);
-		//back center
-		mydata.neuron[9].gates=(rand()%10)+10;
 
 
 
@@ -343,6 +330,20 @@ ping function*/
 
 void ping()
 {
+			//front right
+		mydata.neuron[4].gates=(rand()%10);
+		//front left
+		mydata.neuron[5].gates=(rand()%10)+30;
+		//back right
+		mydata.neuron[6].gates=(rand()%10);
+		//back left
+		mydata.neuron[7].gates=(rand()%10);
+
+		//front center
+		mydata.neuron[8].gates=(rand()%10);
+		//back center
+		mydata.neuron[9].gates=(rand()%10)+10;
+
 /*Arduino specific, g++ doesn't understand
 
 //variables 
