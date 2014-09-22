@@ -186,7 +186,7 @@ void synapses()
 		//front left
 		mydata.neuron[5].gates=(rand()%10);
 		//back right
-		mydata.neuron[6].gates=(rand()%10);
+		mydata.neuron[6].gates=(rand()%10)+30;
 		//back left
 		mydata.neuron[7].gates=(rand()%10);
 
@@ -273,7 +273,7 @@ void synapses()
 		if (mydata.neuron[8].fire==1)
 		{
 			mydata.neuron[0].gates=mydata.neuron[0].gates+10;
-			mydata.neuron[1].gates=mydata.neuron[1].gates-1;
+			mydata.neuron[1].gates=mydata.neuron[1].gates-5;
 		}
 
 
@@ -283,7 +283,7 @@ void synapses()
 		if (mydata.neuron[9].fire==1)
 		{
 			mydata.neuron[1].gates=mydata.neuron[1].gates+10;
-			mydata.neuron[0].gates=mydata.neuron[0].gates-1;
+			mydata.neuron[0].gates=mydata.neuron[0].gates-5;
 		}
 }
 
