@@ -97,11 +97,9 @@ Arduino specific, g++ doesn't understand
 //Setup Motor A
 pinMode(12, OUTPUT); //Initiates Motor Channel A pin
 pinMode(9, OUTPUT); //Initiates Brake Channel A pin
-
 //Setup Motor B
 pinMode(13, OUTPUT); //Initiates Motor Channel A pin
 pinMode(8, OUTPUT);  //Initiates Brake Channel A pin
-  
 //Setup ping pins
 pinMode(pingPin1, OUTPUT);
 pinMode(echoPin1, INPUT); 
@@ -123,7 +121,6 @@ void initneurons()
 {
 	//Initialize program
 	//set up structure 
-	init_neuron_data();
 	//sets all neurons to their resting potential 
 	for (int i=0;i<(number_of_neurons+1);i++)
 	{
@@ -163,6 +160,7 @@ void neuron(int& i)
 
 	//set new concentration based on number of open gates
 	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);	
+
 }
 
 
