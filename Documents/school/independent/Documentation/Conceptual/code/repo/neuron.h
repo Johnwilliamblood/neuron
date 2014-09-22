@@ -323,7 +323,7 @@ void check(int& i)
 	else
 	{
 		mydata.neuron[i].fire = 0;
-		cout<<"neuron "<<i<<" charge-"<< mydata.neuron[i].concentration<<endl;
+		cout<<"neuron "<<i<<"        charge-"<< mydata.neuron[i].concentration<<endl;
 	}
 
 				
