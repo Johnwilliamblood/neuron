@@ -453,7 +453,7 @@ void fire()
 	}
 	if(mydata.neuron[3].fire==0)
 	{
-		if(speedb>0) {speedb=speedb-5;}
+		if(speedb>75) {speedb=speedb-5;}
 	}
 
 
