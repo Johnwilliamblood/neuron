@@ -55,6 +55,7 @@ typedef struct _Neuron
 	int concentration;
 	int fire;
 	int gates;
+	int kgates;
 } NEURON;
 //array of neurons 
 typedef struct _mydata
@@ -143,6 +144,7 @@ void init_neuron_data()
 		mydata.neuron[i].id=i;
 		mydata.neuron[i].fire=0;
 		mydata.neuron[i].gates=0;
+		mydata.neuron[i].kgates=0;
 	}
 	//set resting potential
 	initneurons();
@@ -164,6 +166,7 @@ void neuron(int& i)
 	check(i);
 
 	mydata.neuron[i].gates=0;
+	mydata.neuron[i].kgates=0;
 
 	
 
@@ -173,6 +176,7 @@ void setconcentration(int& i)
 {
 	//set new concentration based on number of open gates
 	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].kgates);
 }
 
 //manage ion gates manage dendrite's connection
@@ -202,15 +206,15 @@ void synapses()
 		Direction neuron forward, inhibits sensor neurons in rear. */
 		if (DIRECTION==0)
 		{
-			mydata.neuron[6].gates=mydata.neuron[6].gates-30;
-			mydata.neuron[7].gates=mydata.neuron[7].gates-30;
+			mydata.neuron[6].gates=mydata.neuron[6].kgates+30;
+			mydata.neuron[7].gates=mydata.neuron[7].kgates+30;
 		}		
 
 		//Direction neuron reverse, inhibits sensor neurons in front.
 		if (DIRECTION==1)
 		{
-			mydata.neuron[4].gates=mydata.neuron[4].gates-30;
-			mydata.neuron[5].gates=mydata.neuron[5].gates-30;
+			mydata.neuron[4].gates=mydata.neuron[4].kgates+30;
+			mydata.neuron[5].gates=mydata.neuron[5].kgates+30;
 		}
 
 
@@ -233,14 +237,14 @@ void synapses()
 		if (mydata.neuron[4].fire==1)
 		{
 			mydata.neuron[2].gates=mydata.neuron[2].gates+10;
-			mydata.neuron[3].gates=mydata.neuron[3].gates-5;
+			mydata.neuron[3].gates=mydata.neuron[3].kgates+5;
 		}
 
 		//front left sensor
 
 		if (mydata.neuron[5].fire==1)
 		{
-			(mydata.neuron[2].gates=mydata.neuron[2].gates-5);
+			(mydata.neuron[2].gates=mydata.neuron[2].kgates+5);
 			(mydata.neuron[3].gates=mydata.neuron[3].gates+10);
 		}
 
@@ -249,14 +253,14 @@ void synapses()
 		if (mydata.neuron[6].fire==1)
 		{
 			(mydata.neuron[2].gates=mydata.neuron[2].gates+10);
-			(mydata.neuron[3].gates=mydata.neuron[3].gates-5);
+			(mydata.neuron[3].gates=mydata.neuron[3].kgates+5);
 		}
 
 		//reverse left sensor
 
 		if (mydata.neuron[7].fire==1)
 		{
-			mydata.neuron[2].gates=(mydata.neuron[2].gates-5);
+			mydata.neuron[2].gates=(mydata.neuron[2].kgates+5);
 			mydata.neuron[3].gates=(mydata.neuron[3].gates+10);
 		}
 /*		Front and Reverse Sensors
@@ -269,7 +273,7 @@ void synapses()
 		if (mydata.neuron[8].fire==1)
 		{
 			mydata.neuron[0].gates=mydata.neuron[0].gates+10;
-			mydata.neuron[1].gates=mydata.neuron[1].gates-5;
+			mydata.neuron[1].gates=mydata.neuron[1].kgates+5;
 		}
 
 
@@ -279,7 +283,7 @@ void synapses()
 		if (mydata.neuron[9].fire==1)
 		{
 			mydata.neuron[1].gates=mydata.neuron[1].gates+10;
-			mydata.neuron[0].gates=mydata.neuron[0].gates-5;
+			mydata.neuron[0].gates=mydata.neuron[0].kgates+5;
 		}
 }
 
