@@ -155,11 +155,14 @@ void init_neuron_data()
 void neuron(int& i)
 {
 	setconcentration(i);
+
 	//S-P pump
 	pump(i);
 
 	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
+
+	mydata.neuron[i].gates=0;
 
 	
 
@@ -505,7 +508,7 @@ void fire()
 
 	for (int j=0;j<resting_potential;j++)
 	{
-		mydata.neuron[j].gates=0;		
+				
 	}
 
 
