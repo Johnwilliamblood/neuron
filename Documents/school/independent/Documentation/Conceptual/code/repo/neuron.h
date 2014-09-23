@@ -176,7 +176,7 @@ void setconcentration(int& i)
 {
 	//set new concentration based on number of open gates
 	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].kgates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].kgates);
 }
 
 //manage ion gates manage dendrite's connection
