@@ -38,11 +38,12 @@ const int number_of_neurons = 9;
 const int resting_potential = 70;
 //The threshold needed for an action potential 
 const int threshold = 60;
+//hyperpolarized state
 const int hyperpolarized = 80;
 //How many ions get through each pass the gate is open
 const int pumprate = 2;
 //How many ions leak through 
-const int leakrate = 2;
+const int leakrate = 3;
 
 //default speed, declare direction variable
 long  speeda=200, speedb=200, DIRECTION;
@@ -340,7 +341,7 @@ void ping()
 {
 			//front right
 		mydata.neuron[4].gates=(rand()%10);
-		//front left
+		//front leftt
 		mydata.neuron[5].gates=(rand()%10);
 		//back right
 		mydata.neuron[6].gates=(rand()%10)+30;
