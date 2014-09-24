@@ -204,15 +204,15 @@ void synapses()
 		Direction neuron forward, inhibits sensor neurons in rear. */
 		if (DIRECTION==0)
 		{
-			mydata.neuron[6].gates=mydata.neuron[6].gates-300;
-			mydata.neuron[7].gates=mydata.neuron[7].gates-300;
+			mydata.neuron[6].gates=mydata.neuron[6].gates-30;
+			mydata.neuron[7].gates=mydata.neuron[7].gates-30;
 		}		
 
 		//Direction neuron reverse, inhibits sensor neurons in front.
 		if (DIRECTION==1)
 		{
-			mydata.neuron[4].gates=mydata.neuron[4].gates-300;
-			mydata.neuron[5].gates=mydata.neuron[5].gates-300;
+			mydata.neuron[4].gates=mydata.neuron[4].gates-30;
+			mydata.neuron[5].gates=mydata.neuron[5].gates-30;
 		}
 
 
@@ -234,7 +234,7 @@ void synapses()
 
 		if (mydata.neuron[4].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+300;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+30;
 			//mydata.neuron[3].gates=mydata.neuron[3].gates-10;
 		}
 
@@ -243,14 +243,14 @@ void synapses()
 		if (mydata.neuron[5].fire==1)
 		{
 			//(mydata.neuron[2].gates=mydata.neuron[2].gates-10);
-			(mydata.neuron[3].gates=mydata.neuron[3].gates+300);
+			(mydata.neuron[3].gates=mydata.neuron[3].gates+30);
 		}
 
 		//reverse right sensor
 
 		if (mydata.neuron[6].fire==1)
 		{
-			(mydata.neuron[2].gates=mydata.neuron[2].gates+300);
+			(mydata.neuron[2].gates=mydata.neuron[2].gates+30);
 			//(mydata.neuron[3].gates=mydata.neuron[3].gates-10);
 		}
 
@@ -259,7 +259,7 @@ void synapses()
 		if (mydata.neuron[7].fire==1)
 		{
 			//mydata.neuron[2].gates=(mydata.neuron[2].gates-10);
-			mydata.neuron[3].gates=(mydata.neuron[3].gates+300);
+			mydata.neuron[3].gates=(mydata.neuron[3].gates+30);
 		}
 /*		Front and Reverse Sensors
 ------------------------------------------------------------------------------------
@@ -270,8 +270,8 @@ void synapses()
 
 		if (mydata.neuron[8].fire==1)
 		{
-			mydata.neuron[0].gates=mydata.neuron[0].gates+100;
-			mydata.neuron[1].gates=mydata.neuron[1].gates-50;
+			mydata.neuron[0].gates=mydata.neuron[0].gates+10;
+			mydata.neuron[1].gates=mydata.neuron[1].gates-5;
 		}
 
 
@@ -280,8 +280,8 @@ void synapses()
 
 		if (mydata.neuron[9].fire==1)
 		{
-			mydata.neuron[1].gates=mydata.neuron[1].gates+100;
-			mydata.neuron[0].gates=mydata.neuron[0].gates-50;
+			mydata.neuron[1].gates=mydata.neuron[1].gates+10;
+			mydata.neuron[0].gates=mydata.neuron[0].gates-5;
 		}
 }
 
