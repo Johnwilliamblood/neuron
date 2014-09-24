@@ -340,18 +340,18 @@ ping function*/
 void ping()
 {
 			//front right
-		mydata.neuron[4].gates=(rand()%10);
+		mydata.neuron[4].gates=30;
 		//front leftt
-		mydata.neuron[5].gates=(rand()%10);
+		mydata.neuron[5].gates=0;
 		//back right
-		mydata.neuron[6].gates=(rand()%10)+30;
+		mydata.neuron[6].gates=30;
 		//back left
-		mydata.neuron[7].gates=(rand()%10)+11;
+		mydata.neuron[7].gates=0;
 
 		//front center
-		mydata.neuron[8].gates=(rand()%10);
+		mydata.neuron[8].gates=30;
 		//back center
-		mydata.neuron[9].gates=(rand()%10)+10;
+		mydata.neuron[9].gates=0;
 
 /*Arduino specific, g++ doesn't understand
 
