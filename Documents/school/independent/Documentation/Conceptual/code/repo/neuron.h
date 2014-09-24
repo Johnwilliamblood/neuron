@@ -344,14 +344,14 @@ void ping()
 			//front right
 		mydata.neuron[4].gates=(rand()%100)+50;
 		//front leftt
-		mydata.neuron[5].gates=(rand()%100);
+		mydata.neuron[5].gates=(rand()%100)-50;
 		//back right
-		mydata.neuron[6].gates=(rand()%100);
+		mydata.neuron[6].gates=(rand()%100)-50;
 		//back left
-		mydata.neuron[7].gates=(rand()%100);
+		mydata.neuron[7].gates=(rand()%100)-50;
 
 		//front center
-		mydata.neuron[8].gates=(rand()%100);
+		mydata.neuron[8].gates=(rand()%100)-50;
 		//back center
 		mydata.neuron[9].gates=(rand()%100)+50;
 
