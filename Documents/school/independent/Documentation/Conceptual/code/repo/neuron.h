@@ -342,11 +342,11 @@ ping function*/
 void ping()
 {
 			//front right
-		mydata.neuron[4].gates=(rand()%10);
+		mydata.neuron[4].gates=(rand()%10)+20;
 		//front leftt
 		mydata.neuron[5].gates=(rand()%10);
 		//back right
-		mydata.neuron[6].gates=(rand()%10)+20;
+		mydata.neuron[6].gates=(rand()%10);
 		//back left
 		mydata.neuron[7].gates=(rand()%10);
 
