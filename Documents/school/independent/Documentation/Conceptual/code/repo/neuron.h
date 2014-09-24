@@ -43,7 +43,7 @@ const int hyperpolarized = 800;
 //How many ions get through each pass the gate is open
 const int pumprate = 20;
 //Flow rate of gates
-const int gaterate =10;
+const int gaterate =100;
 //How many ions leak through 
 const int leakrate = 2;
 
