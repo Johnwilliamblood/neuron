@@ -9,10 +9,11 @@ int main()
 	//setup arduino
 	void setup();
 	//setup neuron array
-	initneurons();
+	init_neuron_data();
 	//Loop that stays active
 	while (1)
 	{	
+		//gather sensory information
 		ping();
 		//connections betweeen neurons
 		synapses();
