@@ -35,15 +35,15 @@ long cm1, cm2, cm3, cm4, cm5, cm6;
 //neuron info
 const int number_of_neurons = 9;
 //the neuron's resting potential -80mv is just 80 for simplicity 
-const int resting_potential = 70;
+const int resting_potential = 700;
 //The threshold needed for an action potential 
-const int threshold = 60;
+const int threshold = 600;
 //hyperpolarized state
-const int hyperpolarized = 80;
+const int hyperpolarized = 800;
 //How many ions get through each pass the gate is open
-const int pumprate = 2;
+const int pumprate = 20;
 //How many ions leak through 
-const int leakrate = 3;
+const int leakrate = 2;
 
 //default speed, declare direction variable
 long  speeda=200, speedb=200, DIRECTION;
@@ -202,15 +202,15 @@ void synapses()
 		Direction neuron forward, inhibits sensor neurons in rear. */
 		if (DIRECTION==0)
 		{
-			mydata.neuron[6].gates=mydata.neuron[6].gates-30;
-			mydata.neuron[7].gates=mydata.neuron[7].gates-30;
+			mydata.neuron[6].gates=mydata.neuron[6].gates-300;
+			mydata.neuron[7].gates=mydata.neuron[7].gates-300;
 		}		
 
 		//Direction neuron reverse, inhibits sensor neurons in front.
 		if (DIRECTION==1)
 		{
-			mydata.neuron[4].gates=mydata.neuron[4].gates-30;
-			mydata.neuron[5].gates=mydata.neuron[5].gates-30;
+			mydata.neuron[4].gates=mydata.neuron[4].gates-300;
+			mydata.neuron[5].gates=mydata.neuron[5].gates-300;
 		}
 
 
@@ -232,32 +232,32 @@ void synapses()
 
 		if (mydata.neuron[4].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+10;
-			mydata.neuron[3].gates=mydata.neuron[3].gates-5;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
+			mydata.neuron[3].gates=mydata.neuron[3].gates-50;
 		}
 
 		//front left sensor
 
 		if (mydata.neuron[5].fire==1)
 		{
-			(mydata.neuron[2].gates=mydata.neuron[2].gates-5);
-			(mydata.neuron[3].gates=mydata.neuron[3].gates+10);
+			(mydata.neuron[2].gates=mydata.neuron[2].gates-50);
+			(mydata.neuron[3].gates=mydata.neuron[3].gates+100);
 		}
 
 		//reverse right sensor
 
 		if (mydata.neuron[6].fire==1)
 		{
-			(mydata.neuron[2].gates=mydata.neuron[2].gates+10);
-			(mydata.neuron[3].gates=mydata.neuron[3].gates-5);
+			(mydata.neuron[2].gates=mydata.neuron[2].gates+100);
+			(mydata.neuron[3].gates=mydata.neuron[3].gates-50);
 		}
 
 		//reverse left sensor
 
 		if (mydata.neuron[7].fire==1)
 		{
-			mydata.neuron[2].gates=(mydata.neuron[2].gates-5);
-			mydata.neuron[3].gates=(mydata.neuron[3].gates+10);
+			mydata.neuron[2].gates=(mydata.neuron[2].gates-50);
+			mydata.neuron[3].gates=(mydata.neuron[3].gates+100);
 		}
 /*		Front and Reverse Sensors
 ------------------------------------------------------------------------------------
@@ -268,8 +268,8 @@ void synapses()
 
 		if (mydata.neuron[8].fire==1)
 		{
-			mydata.neuron[0].gates=mydata.neuron[0].gates+10;
-			mydata.neuron[1].gates=mydata.neuron[1].gates-5;
+			mydata.neuron[0].gates=mydata.neuron[0].gates+100;
+			mydata.neuron[1].gates=mydata.neuron[1].gates-50;
 		}
 
 
@@ -278,8 +278,8 @@ void synapses()
 
 		if (mydata.neuron[9].fire==1)
 		{
-			mydata.neuron[1].gates=mydata.neuron[1].gates+10;
-			mydata.neuron[0].gates=mydata.neuron[0].gates-5;
+			mydata.neuron[1].gates=mydata.neuron[1].gates+100;
+			mydata.neuron[0].gates=mydata.neuron[0].gates-50;
 		}
 }
 
@@ -295,7 +295,7 @@ void pump(int& i)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration-leakrate;
 	}
-	if (mydata.neuron[i].concentration>100)
+	if (mydata.neuron[i].concentration>1000)
 	{
 		mydata.neuron[i].concentration=hyperpolarized;
 	}
@@ -340,18 +340,18 @@ ping function*/
 void ping()
 {
 			//front right
-		mydata.neuron[4].gates=(rand()%10);
+		mydata.neuron[4].gates=(rand()%100);
 		//front leftt
-		mydata.neuron[5].gates=(rand()%10);
+		mydata.neuron[5].gates=(rand()%100);
 		//back right
-		mydata.neuron[6].gates=(rand()%10)+30;
+		mydata.neuron[6].gates=(rand()%100)+35;
 		//back left
-		mydata.neuron[7].gates=(rand()%10);
+		mydata.neuron[7].gates=(rand()%100);
 
 		//front center
-		mydata.neuron[8].gates=(rand()%10);
+		mydata.neuron[8].gates=(rand()%100);
 		//back center
-		mydata.neuron[9].gates=(rand()%10)+10;
+		mydata.neuron[9].gates=(rand()%100)+74;
 
 /*Arduino specific, g++ doesn't understand
 
