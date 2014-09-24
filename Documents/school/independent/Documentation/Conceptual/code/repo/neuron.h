@@ -351,9 +351,9 @@ void ping()
 		mydata.neuron[7].gates=(rand()%100);
 
 		//front center
-		mydata.neuron[8].gates=(rand()%100)+50;
+		mydata.neuron[8].gates=(rand()%100);
 		//back center
-		mydata.neuron[9].gates=(rand()%100);
+		mydata.neuron[9].gates=(rand()%100)+50;
 
 /*Arduino specific, g++ doesn't understand
 
