@@ -42,6 +42,8 @@ const int threshold = 600;
 const int hyperpolarized = 800;
 //How many ions get through each pass the gate is open
 const int pumprate = 20;
+//Flow rate of gates
+const int gaterate =10;
 //How many ions leak through 
 const int leakrate = 2;
 
@@ -172,7 +174,7 @@ void neuron(int& i)
 void setconcentration(int& i)
 {
 	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates*gaterate);
 }
 
 //manage ion gates manage dendrite's connection
