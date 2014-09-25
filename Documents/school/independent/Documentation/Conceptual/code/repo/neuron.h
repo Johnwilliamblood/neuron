@@ -245,7 +245,7 @@ void synapses()
 
 		if (mydata.neuron[8].fire==1)
 		{
-			mydata.neuron[0].gates=mydata.neuron[0].gates+100;
+			mydata.neuron[0].gates=mydata.neuron[0].gates+300;
 			mydata.neuron[1].gates=mydata.neuron[1].kgates+50;
 		}
 
@@ -255,7 +255,7 @@ void synapses()
 
 		if (mydata.neuron[9].fire==1)
 		{
-			mydata.neuron[1].gates=mydata.neuron[1].gates+100;
+			mydata.neuron[1].gates=mydata.neuron[1].gates+300;
 			mydata.neuron[0].gates=mydata.neuron[0].kgates+50;
 		}
 
