@@ -4,7 +4,6 @@ It requires the use of synapses.h and action.h
 //libraries
 #include <iostream>
 #include <stdlib.h>     
-#include <time.h> 
 using namespace std;
 
 
@@ -132,7 +131,7 @@ void initneurons()
 	}
 	
 	//random number time init
-	srand (time(0));
+
 	
 }
 
