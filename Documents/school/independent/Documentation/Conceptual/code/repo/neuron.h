@@ -356,7 +356,7 @@ void ping()
 			//front right
 		mydata.neuron[4].gates=600;
 		//front leftt
-		mydata.neuron[5].gates=200;
+		mydata.neuron[5].gates=20;
 		//back right
 		mydata.neuron[6].gates=0;
 		//back left
