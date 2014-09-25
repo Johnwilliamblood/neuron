@@ -360,7 +360,7 @@ void ping()
 		//back right
 		mydata.neuron[6].gates=300;
 		//back lef2t
-		mydata.neuron[7].gates=280;
+		mydata.neuron[7].gates=180;
 
 		//front center
 		mydata.neuron[8].gates=0;
