@@ -354,13 +354,13 @@ ping function*/
 void ping()
 {
 			//front right
-		mydata.neuron[4].gates=600;
+		mydata.neuron[4].gates=0;
 		//front leftt
-		mydata.neuron[5].gates=300;
+		mydata.neuron[5].gates=0;
 		//back right
-		mydata.neuron[6].gates=0;
+		mydata.neuron[6].gates=600;
 		//back left
-		mydata.neuron[7].gates=0;
+		mydata.neuron[7].gates=300;
 
 		//front center
 		mydata.neuron[8].gates=0;
