@@ -418,7 +418,7 @@ void fire()
 	//Speed pulse rate interpreter 
 	if(mydata.neuron[2].fire==1)
 	{
-		if(speeda<245) {speeda=speeda+2;}
+		if(speeda<225) {speeda=speeda+20;}
 	}
 	if(mydata.neuron[2].fire==0)
 	{
@@ -430,7 +430,7 @@ void fire()
 	//Speed pulse rate interpreter
 	if(mydata.neuron[3].fire==1)
 	{
-		if(speedb<245) {speedb=speedb+2;}
+		if(speedb<225) {speedb=speedb+20;}
 	}
 	if(mydata.neuron[3].fire==0)
 	{
