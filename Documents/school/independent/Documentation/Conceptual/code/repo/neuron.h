@@ -160,7 +160,7 @@ void synapses()
 
 		if (mydata.neuron[4].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+225;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+15;
 		}
 
@@ -169,14 +169,14 @@ void synapses()
 		if (mydata.neuron[5].fire==1)
 		{
 			mydata.neuron[2].kgates=mydata.neuron[2].kgates+15;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
+			mydata.neuron[3].gates=mydata.neuron[3].gates+225;
 		}
 
 		//reverse right sensor
 
 		if (mydata.neuron[6].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+225;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+15;
 		}
 
@@ -185,7 +185,7 @@ void synapses()
 		if (mydata.neuron[7].fire==1)
 		{
 			mydata.neuron[2].kgates=mydata.neuron[2].kgates+15;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
+			mydata.neuron[3].gates=mydata.neuron[3].gates+225;
 		}
 /*		Front and Reverse Sensors
 ------------------------------------------------------------------------------------
