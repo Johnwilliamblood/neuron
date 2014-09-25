@@ -1,6 +1,5 @@
 //Libraries
 #include "neuron.h"
-//#include <stdlib.h>
 using namespace std;
 //begin
 int main()
