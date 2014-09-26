@@ -308,7 +308,6 @@ void ping()
 		mydata.neuron[8].gates=0;
 		//back center
 		mydata.neuron[9].gates=160;
-
 /*Arduino specific, g++ doesn't understand
 
 //variables 
@@ -416,7 +415,7 @@ void fire()
 	//Speed pulse rate interpreter 
 	if(mydata.neuron[2].fire==1)
 	{
-		if(speeda<250) {speeda=speeda+10;}
+		if(speeda<250) {speeda=speeda+5;}
 	}
 	if(mydata.neuron[2].fire==0)
 	{
@@ -428,7 +427,7 @@ void fire()
 	//Speed pulse rate interpreter
 	if(mydata.neuron[3].fire==1)
 	{
-		if(speedb<250) {speedb=speedb+10;}
+		if(speedb<250) {speedb=speedb+5;}
 	}
 	if(mydata.neuron[3].fire==0)
 	{
