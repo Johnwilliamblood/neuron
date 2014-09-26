@@ -303,12 +303,12 @@ void ping()
 		//back right
 		mydata.neuron[6].gates=150;
 		//back lef2t
-		mydata.neuron[7].gates=300;
+		mydata.neuron[7].gates=150;
 
 		//front center
 		mydata.neuron[8].gates=0;
 		//back center
-		mydata.neuron[9].gates=500;
+		mydata.neuron[9].gates=150;
 
 /*Arduino specific, g++ doesn't understand
 
