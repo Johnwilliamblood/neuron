@@ -161,14 +161,14 @@ void synapses()
 		if (mydata.neuron[4].fire==1)
 		{
 			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+1;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+100;
 		}
 
 		//front left sensor
 
 		if (mydata.neuron[5].fire==1)
 		{
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+1;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+100;
 			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
 		}
 		//reverse right sensor
@@ -176,14 +176,14 @@ void synapses()
 		if (mydata.neuron[6].fire==1)
 		{
 			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+1;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+100;
 		}
 
 		//reverse left sensor
 
 		if (mydata.neuron[7].fire==1)
 		{
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+1;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+100;
 			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
 		}
 /*		Front and Reverse Sensors
@@ -308,7 +308,7 @@ void ping()
 		mydata.neuron[8].gates=0;
 		//back center
 		mydata.neuron[9].gates=160;
-/*Arduino specific, g++ doesn't understand
+/*Arduino sp100cific, g++ doesn't understand
 
 //variables 
   long duration; 
