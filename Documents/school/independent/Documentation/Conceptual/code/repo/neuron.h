@@ -21,7 +21,7 @@ const int threshold = 600;
 //hyperpolarized state
 const int hyperpolarized = 800;
 //How many ions get through each pass the gate is open
-const int pumprate = 20;
+const int pumprate = 30;
 //How many ions leak through leaky channel
 const int leakrate = 10;
 
