@@ -195,7 +195,7 @@ void synapses()
 
 		if (mydata.neuron[8].fire==1)
 		{
-			mydata.neuron[0].gates=mydata.neuron[0].gates+300;
+			mydata.neuron[0].gates=mydata.neuron[0].gates+130;
 			mydata.neuron[1].gates=mydata.neuron[1].kgates+50;
 		}
 
@@ -205,7 +205,7 @@ void synapses()
 
 		if (mydata.neuron[9].fire==1)
 		{
-			mydata.neuron[1].gates=mydata.neuron[1].gates+300;
+			mydata.neuron[1].gates=mydata.neuron[1].gates+130;
 			mydata.neuron[0].gates=mydata.neuron[0].kgates+50;
 		}
 
@@ -301,9 +301,9 @@ void ping()
 		//front leftt
 		mydata.neuron[5].gates=0;
 		//back right
-		mydata.neuron[6].gates=150;
+		mydata.neuron[6].gates=130;
 		//back lef2t
-		mydata.neuron[7].gates=150;
+		mydata.neuron[7].gates=260;
 
 		//front center
 		mydata.neuron[8].gates=0;
