@@ -302,7 +302,7 @@ void ping()
 		//back right
 		mydata.neuron[6].gates=200;
 		//back lef2t
-		mydata.neuron[7].gates=150;
+		mydata.neuron[7].gates=120;
 
 		//front center
 		mydata.neuron[8].gates=0;
@@ -416,7 +416,7 @@ void fire()
 	//Speed pulse rate interpreter 
 	if(mydata.neuron[2].fire==1)
 	{
-		if(speeda<250) {speeda=speeda+6;}
+		if(speeda<250) {speeda=speeda+5;}
 	}
 	if(mydata.neuron[2].fire==0)
 	{
@@ -428,7 +428,7 @@ void fire()
 	//Speed pulse rate interpreter
 	if(mydata.neuron[3].fire==1)
 	{
-		if(speedb<250) {speedb=speedb+6;}
+		if(speedb<250) {speedb=speedb+5;}
 	}
 	if(mydata.neuron[3].fire==0)
 	{
