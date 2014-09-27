@@ -300,7 +300,7 @@ void ping()
 		//back right
 		mydata.neuron[6].gates=200;
 		//back lef5
-		mydata.neuron[7].gates=80;
+		mydata.neuron[7].gates=85;
 
 		//front cent15
 		mydata.neuron[8].gates=0;
