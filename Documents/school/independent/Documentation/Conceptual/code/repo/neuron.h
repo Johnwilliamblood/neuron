@@ -160,31 +160,31 @@ void synapses()
 
 		if (mydata.neuron[4].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
-			//mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
 
 		//front left sensor
 
 		if (mydata.neuron[5].fire==1)
 		{
-			//mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+100;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
+			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
 		}
 		//reverse right sensor
 
 		if (mydata.neuron[6].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
-			//mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
 
 		//reverse left sensor
 
 		if (mydata.neuron[7].fire==1)
 		{
-			//mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+100;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
+			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
 		}
 /*		Front and Reverse Sensors
 ------------------------------------------------------------------------------------
@@ -298,15 +298,15 @@ void ping()
 		//front leftt
 		mydata.neuron[5].gates=0;
 		//back right
-		mydata.neuron[6].gates=150;
+		mydata.neuron[6].gates=200;
 		//back lef5
-		mydata.neuron[7].gates=125;
+		mydata.neuron[7].gates=87;
 
 		//front cent15
 		mydata.neuron[8].gates=0;
 		//back center
 		mydata.neuron[9].gates=160;
-/*Arduino sp100cific, g++ d25n't understand
+/*Arduino specific, g++ doesn't understand
 
 //variables 
   long duration; 
@@ -413,22 +413,23 @@ void fire()
 	//Speed pulse rate interpreter 
 	if(mydata.neuron[2].fire==1)
 	{
-		if(speeda<245) {speeda=speeda+10;}
+		if(speeda<245) {speeda=speeda+5;}
 	}
 	if(mydata.neuron[2].fire==0)
 	{
-		if(speeda>50) {speeda--;}
+		if(speeda>75) {speeda--;}
 	}
+
 
 	//motorb accumulator	
 	//Speed pulse rate interpreter
 	if(mydata.neuron[3].fire==1)
 	{
-		if(speedb<245) {speedb=speedb+10;}
+		if(speedb<245) {speedb=speedb+5;}
 	}
 	if(mydata.neuron[3].fire==0)
 	{
-		if(speedb>50) {speedb--;}
+		if(speedb>75) {speedb--;}
 	}
 
 
