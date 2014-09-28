@@ -161,14 +161,14 @@ void synapses()
 		if (mydata.neuron[4].fire==1)
 		{
 			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+25;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+10;
 		}
 
 		//front left sensor
 
 		if (mydata.neuron[5].fire==1)
 		{
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+25;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+10;
 			mydata.neuron[3].gates=mydata.neuron[3].gates+100;
 		}
 		//reverse right sensor
@@ -176,14 +176,14 @@ void synapses()
 		if (mydata.neuron[6].fire==1)
 		{
 			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+25;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+10;
 		}
 
 		//reverse left sensor
 
 		if (mydata.neuron[7].fire==1)
 		{
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+25;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+10;
 			mydata.neuron[3].gates=mydata.neuron[3].gates+100;
 		}
 /*		Front and Reverse Sensors
@@ -413,7 +413,7 @@ void fire()
 	//Speed pulse rate interpreter 
 	if(mydata.neuron[2].fire==1)
 	{
-		if(speeda<245) {speeda=speeda+10;}
+		if(speeda<245) {speeda=speeda+5;}
 	}
 	if(mydata.neuron[2].fire==0)
 	{
@@ -425,7 +425,7 @@ void fire()
 	//Speed pulse rate interpreter
 	if(mydata.neuron[3].fire==1)
 	{
-		if(speedb<245) {speedb=speedb+10;}
+		if(speedb<245) {speedb=speedb+5;}
 	}
 	if(mydata.neuron[3].fire==0)
 	{
