@@ -160,31 +160,31 @@ void synapses()
 
 		if (mydata.neuron[4].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+25;
 		}
 
 		//front left sensor
 
 		if (mydata.neuron[5].fire==1)
 		{
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+25;
+			mydata.neuron[3].gates=mydata.neuron[3].gates+100;
 		}
 		//reverse right sensor
 
 		if (mydata.neuron[6].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
+			mydata.neuron[2].gates=mydata.neuron[2].gates+100;
+			mydata.neuron[3].kgates=mydata.neuron[3].kgates+25;
 		}
 
 		//reverse left sensor
 
 		if (mydata.neuron[7].fire==1)
 		{
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
+			mydata.neuron[2].kgates=mydata.neuron[2].kgates+25;
+			mydata.neuron[3].gates=mydata.neuron[3].gates+100;
 		}
 /*		Front and Reverse Sensors
 ------------------------------------------------------------------------------------
@@ -300,7 +300,7 @@ void ping()
 		//back right
 		mydata.neuron[6].gates=150;
 		//back lef5
-		mydata.neuron[7].gates=75;
+		mydata.neuron[7].gates=200;
 
 		//front cent15
 		mydata.neuron[8].gates=0;
