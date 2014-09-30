@@ -35,7 +35,7 @@ typedef struct _Neuron
 	int id;
 	int concentration;
 	int fire;
-	int gates;
+	int NAgates;
 	int kgates;
 } NEURON;
 //array of neurons 
@@ -68,10 +68,6 @@ void pump(int& i);
 
 
 
-
-
-
-
 void initneurons()
 {
 	//Initialize program
@@ -95,7 +91,7 @@ void init_neuron_data()
 	{ 
 		mydata.neuron[i].id=i;
 		mydata.neuron[i].fire=0;
-		mydata.neuron[i].gates=0;
+		mydata.neuron[i].NAgates=0;
 		mydata.neuron[i].kgates=0;
 	}
 	//set resting potential
@@ -117,7 +113,7 @@ void neuron(int& i)
 	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
 
-	mydata.neuron[i].gates=0;
+	mydata.neuron[i].NAgates=0;
 	mydata.neuron[i].kgates=0;
 
 	
@@ -127,7 +123,7 @@ void neuron(int& i)
 void setconcentration(int& i)
 {
 	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].gates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].NAgates);
 	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].kgates);
 }
 
@@ -160,7 +156,7 @@ void synapses()
 
 		if (mydata.neuron[4].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
+			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
 
@@ -169,13 +165,13 @@ void synapses()
 		if (mydata.neuron[5].fire==1)
 		{
 			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
+			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
 		}
 		//reverse right sensor
 
 		if (mydata.neuron[6].fire==1)
 		{
-			mydata.neuron[2].gates=mydata.neuron[2].gates+200;
+			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
 
@@ -184,7 +180,7 @@ void synapses()
 		if (mydata.neuron[7].fire==1)
 		{
 			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].gates=mydata.neuron[3].gates+200;
+			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
 		}
 /*		Front and Reverse Sensors
 ------------------------------------------------------------------------------------
@@ -195,8 +191,8 @@ void synapses()
 
 		if (mydata.neuron[8].fire==1)
 		{
-			mydata.neuron[0].gates=mydata.neuron[0].gates+160;
-			mydata.neuron[1].gates=mydata.neuron[1].kgates+25;
+			mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+160;
+			mydata.neuron[1].kgates=mydata.neuron[1].kgates+25;
 		}
 
 
@@ -205,8 +201,8 @@ void synapses()
 
 		if (mydata.neuron[9].fire==1)
 		{
-			mydata.neuron[1].gates=mydata.neuron[1].gates+160;
-			mydata.neuron[0].gates=mydata.neuron[0].kgates+25;
+			mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+160;
+			mydata.neuron[0].kgates=mydata.neuron[0].kgates+25;
 		}
 
 
@@ -222,16 +218,16 @@ void synapses()
 		Direction neuron forward, inhibits sensor neurons in rear. */
 		if (DIRECTION==0)
 		{
-			mydata.neuron[6].gates=0;
-			mydata.neuron[7].gates=0;
+			mydata.neuron[6].NAgates=0;
+			mydata.neuron[7].NAgates=0;
 			mydata.neuron[6].kgates=0;
 			mydata.neuron[7].kgates=0;			
 		}	
 		//Direction neuron reverse, inhibits sensor neurons in front.
 		if (DIRECTION==1)
 		{
-			mydata.neuron[4].gates=0;
-			mydata.neuron[5].gates=0;
+			mydata.neuron[4].NAgates=0;
+			mydata.neuron[5].NAgates=0;
 			mydata.neuron[4].kgates=0;
 			mydata.neuron[5].kgates=0;			
 		}
@@ -294,18 +290,18 @@ ping function*/
 void ping()
 {
 			//front right
-		mydata.neuron[4].gates=0;
+		mydata.neuron[4].NAgates=0;
 		//front leftt
-		mydata.neuron[5].gates=0;
+		mydata.neuron[5].NAgates=0;
 		//back right
-		mydata.neuron[6].gates=200;
+		mydata.neuron[6].NAgates=200;
 		//back lef5
-		mydata.neuron[7].gates=87;
+		mydata.neuron[7].NAgates=87;
 
 		//front cent15
-		mydata.neuron[8].gates=0;
+		mydata.neuron[8].NAgates=0;
 		//back center
-		mydata.neuron[9].gates=160;
+		mydata.neuron[9].NAgates=160;
 /*Arduino specific, g++ doesn't understand
 
 //variables 
