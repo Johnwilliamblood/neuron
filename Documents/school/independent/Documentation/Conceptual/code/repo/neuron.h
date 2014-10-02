@@ -15,11 +15,11 @@ long cm1, cm2, cm3, cm4, cm5, cm6;
 //neuron info
 const int number_of_neurons = 9;
 //the neuron's resting potential -80mv is just 80 for simplicity 
-const int resting_potential = -700;
+const int resting_potential = 700;
 //The threshold needed for an action potential 
-const int threshold = -600;
+const int threshold = 600;
 //hyperpolarized state
-const int hyperpolarized = -800;
+const int hyperpolarized = 800;
 //How many ions get through each pass the gate is open
 const int pumprate = 35;
 //How many ions leak through leaky channel
@@ -68,6 +68,21 @@ void pump(int& i);
 
 
 
+void initneurons()
+{
+	//Initialize program
+	//set up structure 
+	//sets all neurons to their resting potential 
+	for (int i=0;i<(number_of_neurons+1);i++)
+	{
+		mydata.neuron[i].concentration=resting_potential;
+	}
+	
+	//random number time init
+
+	
+}
+
 
 //function to set each neuron id, set fire status to 0 and gate open status to 0 
 void init_neuron_data()
@@ -84,17 +99,6 @@ void init_neuron_data()
 }
 
 
-void initneurons()
-{
-	//Initialize program
-	//set up structure 
-	//sets all neurons to their resting potential 
-	for (int i=0;i<(number_of_neurons+1);i++)
-	{
-		mydata.neuron[i].concentration=resting_potential;
-	}
-	
-}
 
 //ping function
 
@@ -187,6 +191,15 @@ void ping()
   cm6 = microsecondsTocm(duration);
 */
 }
+
+
+//converts ping duration to cm
+long microsecondsTocm(long microseconds)
+{
+   return microseconds / 29 / 2; 
+}
+
+
 
 
 
@@ -307,6 +320,7 @@ void synapses()
 
 
 
+
 //simulates the sodium potasium pump in the current (i) neuron
 void neuron(int& i)
 {
@@ -328,10 +342,9 @@ void neuron(int& i)
 void setconcentration(int& i)
 {
 	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].NAgates);
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].kgates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].NAgates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].kgates);
 }
-
 
 void pump(int& i)
 {
@@ -374,25 +387,6 @@ void check(int& i)
 
 
 
-
-//converts ping duration to cm
-long microsecondsTocm(long microseconds)
-{
-   return microseconds / 29 / 2; 
-}
-
-//motor control
-  void motorcontrol()
-  {
-    /*Arduino specific, g++ doesn't understand
-    digitalWrite(12, DIRECTION); //Establishes forward direction of Channel A
-    digitalWrite(9, LOW);   //Disengage the Brake for Channel A
-    analogWrite(3, speeda);   //Spins the motor on Channel A at full speed
-    digitalWrite(13, DIRECTION); //Establishes forward direction of Channel A
-    digitalWrite(8, LOW);   //Disengage the Brake for Channel A
-    analogWrite(11, speedb);   //Spins the motor on Channel A at full speed 
-    */
-  }
 
 
 /*What happens when different neurons fire
@@ -445,15 +439,23 @@ void fire()
 	}
 	cout<<endl;
 
-
-
 //	motorcontrol();
 	cout<<"Direction:"<<DIRECTION<<" speeda:"<<speeda<<" speedb:"<<speedb<<endl;
-
-
-
 }
 
 
+
+//motor control
+  void motorcontrol()
+  {
+    /*Arduino specific, g++ doesn't understand
+    digitalWrite(12, DIRECTION); //Establishes forward direction of Channel A
+    digitalWrite(9, LOW);   //Disengage the Brake for Channel A
+    analogWrite(3, speeda);   //Spins the motor on Channel A at full speed
+    digitalWrite(13, DIRECTION); //Establishes forward direction of Channel A
+    digitalWrite(8, LOW);   //Disengage the Brake for Channel A
+    analogWrite(11, speedb);   //Spins the motor on Channel A at full speed 
+    */
+  }
 
 
