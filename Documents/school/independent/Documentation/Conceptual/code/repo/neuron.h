@@ -15,11 +15,11 @@ long cm1, cm2, cm3, cm4, cm5, cm6;
 //neuron info
 const int number_of_neurons = 9;
 //the neuron's resting potential -80mv is just 80 for simplicity 
-const int resting_potential = 700;
+const int resting_potential = -700;
 //The threshold needed for an action potential 
-const int threshold = 600;
+const int threshold = -600;
 //hyperpolarized state
-const int hyperpolarized = 800;
+const int hyperpolarized = -800;
 //How many ions get through each pass the gate is open
 const int pumprate = 35;
 //How many ions leak through leaky channel
@@ -68,21 +68,6 @@ void pump(int& i);
 
 
 
-void initneurons()
-{
-	//Initialize program
-	//set up structure 
-	//sets all neurons to their resting potential 
-	for (int i=0;i<(number_of_neurons+1);i++)
-	{
-		mydata.neuron[i].concentration=resting_potential;
-	}
-	
-	//random number time init
-
-	
-}
-
 
 //function to set each neuron id, set fire status to 0 and gate open status to 0 
 void init_neuron_data()
@@ -99,33 +84,111 @@ void init_neuron_data()
 }
 
 
-
-
-
-//simulates the sodium potasium pump in the current (i) neuron
-void neuron(int& i)
+void initneurons()
 {
-	setconcentration(i);
-
-	//S-P pump
-	pump(i);
-
-	//check to see if current neuron reached action potential if so, save to mydata fire 
-	check(i);
-
-	mydata.neuron[i].NAgates=0;
-	mydata.neuron[i].kgates=0;
-
+	//Initialize program
+	//set up structure 
+	//sets all neurons to their resting potential 
+	for (int i=0;i<(number_of_neurons+1);i++)
+	{
+		mydata.neuron[i].concentration=resting_potential;
+	}
 	
-
 }
 
-void setconcentration(int& i)
+//ping function
+
+void ping()
 {
-	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].NAgates);
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].kgates);
+			//front right
+		mydata.neuron[4].NAgates=0;
+		//front leftt
+		mydata.neuron[5].NAgates=0;
+		//back right
+		mydata.neuron[6].NAgates=200;
+		//back lef5
+		mydata.neuron[7].NAgates=87;
+
+		//front cent15
+		mydata.neuron[8].NAgates=0;
+		//back center
+		mydata.neuron[9].NAgates=160;
+/*Arduino specific, g++ doesn't understand
+
+//variables 
+  long duration; 
+
+//quick burst of electricity to the proximity sensor to activate it 
+  digitalWrite(pingPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin1, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin1, LOW); 
+  
+//reads signal that bounces back
+  duration= pulseIn(echoPin1,HIGH);
+//converts duration to cm using function below 
+  cm1 = microsecondsTocm(duration);
+
+  digitalWrite(pingPin2, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin2, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin2, LOW); 
+  
+//reads signal that bounces back
+  duration= pulseIn(echoPin2,HIGH);
+//converts duration to cm using function below 
+  cm2 = microsecondsTocm(duration);
+
+
+  digitalWrite(pingPin3, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin3, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin3, LOW); 
+  
+//reads signal that bounces back
+  duration= pulseIn(echoPin3,HIGH);
+//converts duration to cm using function below 
+  cm3 = microsecondsTocm(duration);
+
+  digitalWrite(pingPin4, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin4, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin4, LOW); 
+  
+//reads signal that bounces back
+  duration= pulseIn(echoPin4,HIGH);
+//converts duration to cm using function below 
+  cm4 = microsecondsTocm(duration);
+  
+  digitalWrite(pingPin5, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin5, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin5, LOW); 
+  
+//reads signal that bounces back
+  duration= pulseIn(echoPin5,HIGH);
+//converts duration to cm using function below 
+  cm5 = microsecondsTocm(duration);
+  
+  digitalWrite(pingPin6, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin6, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin6, LOW); 
+  
+//reads signal that bounces back
+  duration= pulseIn(echoPin6,HIGH);
+//converts duration to cm using function below 
+  cm6 = microsecondsTocm(duration);
+*/
 }
+
+
 
 //manage ion gates manage dendrite's connection
 void synapses()
@@ -243,6 +306,33 @@ void synapses()
 }
 
 
+
+//simulates the sodium potasium pump in the current (i) neuron
+void neuron(int& i)
+{
+	setconcentration(i);
+
+	//S-P pump
+	pump(i);
+
+	//check to see if current neuron reached action potential if so, save to mydata fire 
+	check(i);
+
+	mydata.neuron[i].NAgates=0;
+	mydata.neuron[i].kgates=0;
+
+	
+
+}
+
+void setconcentration(int& i)
+{
+	//set new concentration based on number of open gates
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].NAgates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].kgates);
+}
+
+
 void pump(int& i)
 {
 	//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
@@ -282,100 +372,8 @@ void check(int& i)
 }
 
 
-/*Functions
------------------------------------------------------------------------------------------
-
-ping function*/
-
-void ping()
-{
-			//front right
-		mydata.neuron[4].NAgates=0;
-		//front leftt
-		mydata.neuron[5].NAgates=0;
-		//back right
-		mydata.neuron[6].NAgates=200;
-		//back lef5
-		mydata.neuron[7].NAgates=87;
-
-		//front cent15
-		mydata.neuron[8].NAgates=0;
-		//back center
-		mydata.neuron[9].NAgates=160;
-/*Arduino specific, g++ doesn't understand
-
-//variables 
-  long duration; 
-
-//quick burst of electricity to the proximity sensor to activate it 
-  digitalWrite(pingPin1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin1, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin1, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin1,HIGH);
-//converts duration to cm using function below 
-  cm1 = microsecondsTocm(duration);
-
-  digitalWrite(pingPin2, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin2, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin2, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin2,HIGH);
-//converts duration to cm using function below 
-  cm2 = microsecondsTocm(duration);
 
 
-  digitalWrite(pingPin3, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin3, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin3, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin3,HIGH);
-//converts duration to cm using function below 
-  cm3 = microsecondsTocm(duration);
-
-  digitalWrite(pingPin4, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin4, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin4, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin4,HIGH);
-//converts duration to cm using function below 
-  cm4 = microsecondsTocm(duration);
-  
-  digitalWrite(pingPin5, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin5, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin5, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin5,HIGH);
-//converts duration to cm using function below 
-  cm5 = microsecondsTocm(duration);
-  
-  digitalWrite(pingPin6, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin6, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin6, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin6,HIGH);
-//converts duration to cm using function below 
-  cm6 = microsecondsTocm(duration);
-*/
-}
 
 //converts ping duration to cm
 long microsecondsTocm(long microseconds)
