@@ -354,11 +354,11 @@ void pump(int& i)
 	//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
 	if (mydata.neuron[i].concentration>resting_potential)
 	{
-		mydata.neuron[i].concentration=mydata.neuron[i].concentration+pumprate;
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
 	}
 	if (mydata.neuron[i].concentration<resting_potential)
 	{
-		mydata.neuron[i].concentration=mydata.neuron[i].concentration-leakrate;
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration+leakrate;
 	}
 	if (mydata.neuron[i].concentration<-1000)
 	{
