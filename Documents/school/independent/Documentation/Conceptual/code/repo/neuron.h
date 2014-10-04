@@ -21,9 +21,9 @@ const int threshold = -600;
 //hyperpolarized state
 const int hyperpolarized = -800;
 //How many ions get through each pass the gate is open
-const int pumprate = -35;
+const int pumprate = 35;
 //How many ions leak through leaky channel
-const int leakrate = -10;
+const int leakrate = 10;
 
 
 //default speed, declare direction variable
@@ -345,8 +345,8 @@ void neuron(int& i)
 void setconcentration(int& i)
 {
 	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].NAgates);
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].kgates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].NAgates);
+	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].kgates);
 }
 
 void pump(int& i)
