@@ -15,15 +15,15 @@ long cm1, cm2, cm3, cm4, cm5, cm6;
 //neuron info
 const int number_of_neurons = 9;
 //the neuron's resting potential -80mv is just 80 for simplicity 
-const int resting_potential = 700;
+const int resting_potential = -700;
 //The threshold needed for an action potential 
-const int threshold = 600;
+const int threshold = -600;
 //hyperpolarized state
-const int hyperpolarized = 800;
+const int hyperpolarized = -800;
 //How many ions get through each pass the gate is open
-const int pumprate = 35;
+const int pumprate = -35;
 //How many ions leak through leaky channel
-const int leakrate = 10;
+const int leakrate = -10;
 
 
 //default speed, declare direction variable
@@ -229,17 +229,18 @@ void synapses()
 ----------------------------------------------------------------------		
 	
 		front right sensor*/
-
+		//talk about neurotransmitters (modled effect of excite/inhib connections/synapse. 
 		if (mydata.neuron[4].fire==1)
 		{
+
 			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
 
 		//front left sensor
-
 		if (mydata.neuron[5].fire==1)
 		{
+
 			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
 			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
 		}
@@ -247,6 +248,7 @@ void synapses()
 
 		if (mydata.neuron[6].fire==1)
 		{
+
 			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
@@ -255,6 +257,7 @@ void synapses()
 
 		if (mydata.neuron[7].fire==1)
 		{
+
 			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
 			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
 		}
@@ -349,15 +352,15 @@ void setconcentration(int& i)
 void pump(int& i)
 {
 	//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
-	if (mydata.neuron[i].concentration<resting_potential)
+	if (mydata.neuron[i].concentration>resting_potential)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration+pumprate;
 	}
-	if (mydata.neuron[i].concentration>resting_potential)
+	if (mydata.neuron[i].concentration<resting_potential)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration-leakrate;
 	}
-	if (mydata.neuron[i].concentration>1000)
+	if (mydata.neuron[i].concentration<-1000)
 	{
 		mydata.neuron[i].concentration=hyperpolarized;
 	}
