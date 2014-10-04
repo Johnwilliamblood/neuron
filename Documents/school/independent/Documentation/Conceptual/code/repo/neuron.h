@@ -354,11 +354,11 @@ void pump(int& i)
 	//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
 	if (mydata.neuron[i].concentration>resting_potential)
 	{
-		mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration+pumprate;
 	}
 	if (mydata.neuron[i].concentration<resting_potential)
 	{
-		mydata.neuron[i].concentration=mydata.neuron[i].concentration+leakrate;
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration-leakrate;
 	}
 	if (mydata.neuron[i].concentration<-1000)
 	{
@@ -371,7 +371,7 @@ void pump(int& i)
 void check(int& i)
 { 
 	//if current neuron fired set fire status to 1 else set to 0 
-	if (mydata.neuron[i].concentration<threshold)
+	if (mydata.neuron[i].concentration>threshold)
 	{
 		mydata.neuron[i].fire = 1;	
 		cout<<"neuron "<<i<<" fired! charge:-"<< mydata.neuron[i].concentration/10<<endl;
