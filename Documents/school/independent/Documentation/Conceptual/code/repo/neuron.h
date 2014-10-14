@@ -229,15 +229,15 @@ void synapses()
 ----------------------------------------------------------------------		
 	
 		front right sensor*/
-		//talk about neurotransmitters (modled effect of excite/inhib connections/synapse. 
+		//talk about neurotransmitters (modled effect of excite/inhib connections/synapse.
+		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane		
 		if (mydata.neuron[4].fire==1)
 		{
-
 			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
 			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
 		}
-
 		//front left sensor
+		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
 		if (mydata.neuron[5].fire==1)
 		{
 
@@ -245,7 +245,7 @@ void synapses()
 			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
 		}
 		//reverse right sensor
-
+		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
 		if (mydata.neuron[6].fire==1)
 		{
 
@@ -254,7 +254,7 @@ void synapses()
 		}
 
 		//reverse left sensor
-
+		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
 		if (mydata.neuron[7].fire==1)
 		{
 
@@ -267,7 +267,7 @@ void synapses()
 		
 
 		Front Sensor*/
-
+		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
 		if (mydata.neuron[8].fire==1)
 		{
 			mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+160;
@@ -276,7 +276,7 @@ void synapses()
 
 
 		//Reverse Sensor
-		//input
+		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane		
 
 		if (mydata.neuron[9].fire==1)
 		{
@@ -295,6 +295,7 @@ void synapses()
 ------------------------------------------------------------------------------------------
 
 		Direction neuron forward, inhibits sensor neurons in rear. */
+		//This simulates the effect of an inhibitory neurotransmitter
 		if (DIRECTION==0)
 		{
 			mydata.neuron[6].NAgates=0;
@@ -303,6 +304,7 @@ void synapses()
 			mydata.neuron[7].kgates=0;			
 		}	
 		//Direction neuron reverse, inhibits sensor neurons in front.
+		//This simulates the effect of an inhibitory neurotransmitter		
 		if (DIRECTION==1)
 		{
 			mydata.neuron[4].NAgates=0;
