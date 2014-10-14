@@ -358,10 +358,14 @@ void pump(int& i)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
 	}
+
+	//if the concentration is too high ions will leak out. 
 	if (mydata.neuron[i].concentration<resting_potential)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration+leakrate;
 	}
+
+	//This is to limit the number of ions available.
 	if (mydata.neuron[i].concentration<-1000)
 	{
 		mydata.neuron[i].concentration=hyperpolarized;
