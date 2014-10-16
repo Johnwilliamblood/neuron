@@ -25,6 +25,16 @@ const int pumprate = 35;
 //How many ions leak through leaky channel
 const int leakrate = 10;
 
+//Synapse strengths
+const int speedexcite = 200;
+const int speedinhibit = 5;
+const int epiexcite = 300;
+const int epiinhibit = 50;
+const int directionexcite = 160;
+const int directioninhibit = 25;
+const int directionmodulator = 0;
+
+
 
 //default speed, declare direction variable
 long  speeda=200, speedb=200, DIRECTION;
@@ -86,7 +96,6 @@ void init_neuron_data()
 	initneurons();
 }
 
-
 void initneurons()
 {
 	//Initialize program
@@ -98,53 +107,40 @@ void initneurons()
 	}
 }
 
-
-
-
-
-
 //ping function
 
 void ping()
 {
 
-		/*Arduino specific, g++ doesn't understand
-
-		//variables 
-		  long duration; 
-
-		//quick burst of electricity to the proximity sensor to activate it 
-		  digitalWrite(pingPin1, LOW);
-		  delayMicroseconds(2);
- 		 digitalWrite(pingPin1, HIGH);
-		  delayMicroseconds(5);
-		  digitalWrite(pingPin1, LOW); 
-  
-		//reads signal that bounces back
-		  duration= pulseIn(echoPin1,HIGH);
-		//converts duration to cm using function below 
- 		 cm1 = microsecondsTocm(duration);
-
-		digitalWrite(pingPin2, LOW);
- 		 delayMicroseconds(2);
-		  digitalWrite(pingPin2, HIGH);
- 		 delayMicroseconds(5);
- 		 digitalWrite(pingPin2, LOW); 
-  
-		//reads signal that bounces back
-  		duration= pulseIn(echoPin2,HIGH);
+	/*Arduino specific, g++ doesn't understand
+	//variables 
+	long duration; 
+	//quick burst of electricity to the proximity sensor to activate it 
+	digitalWrite(pingPin1, LOW);
+	delayMicroseconds(2);
+ 	digitalWrite(pingPin1, HIGH);
+	delayMicroseconds(5);
+	digitalWrite(pingPin1, LOW);  
+	//reads signal that bounces back
+	duration= pulseIn(echoPin1,HIGH);
 	//converts duration to cm using function below 
- 	 cm2 = microsecondsTocm(duration);
-
-
+ 	cm1 = microsecondsTocm(duration);
+	digitalWrite(pingPin2, LOW);
+ 	delayMicroseconds(2);
+	digitalWrite(pingPin2, HIGH);
+ 	delayMicroseconds(5);
+ 	digitalWrite(pingPin2, LOW);  
+	//reads signal that bounces back
+  	duration= pulseIn(echoPin2,HIGH);
+	//converts duration to cm using function below 
+ 	cm2 = microsecondsTocm(duration);
   	digitalWrite(pingPin3, LOW);
   	delayMicroseconds(2);
   	digitalWrite(pingPin3, HIGH);
   	delayMicroseconds(5);
-  	digitalWrite(pingPin3, LOW); 
-  
+  	digitalWrite(pingPin3, LOW);   
 	//reads signal that bounces back
- 	 duration= pulseIn(echoPin3,HIGH);
+ 	duration= pulseIn(echoPin3,HIGH);
 	//converts duration to cm using function below 
  	 cm3 = microsecondsTocm(duration);
 
@@ -152,34 +148,29 @@ void ping()
  	 delayMicroseconds(2);
  	 digitalWrite(pingPin4, HIGH);
  	 delayMicroseconds(5);
- 	 digitalWrite(pingPin4, LOW); 
-  
+ 	 digitalWrite(pingPin4, LOW);   
 	//reads signal that bounces back
- 	 duration= pulseIn(echoPin4,HIGH);
+ 	duration= pulseIn(echoPin4,HIGH);
 	//converts duration to cm using function below 
- 	 cm4 = microsecondsTocm(duration);
-  
- 	 digitalWrite(pingPin5, LOW);
-	  delayMicroseconds(2);
- 	 digitalWrite(pingPin5, HIGH);
- 	 delayMicroseconds(5);
- 	 digitalWrite(pingPin5, LOW); 
-  
+ 	cm4 = microsecondsTocm(duration);  
+ 	digitalWrite(pingPin5, LOW);
+	delayMicroseconds(2);
+ 	digitalWrite(pingPin5, HIGH);
+ 	delayMicroseconds(5);
+ 	digitalWrite(pingPin5, LOW);  
 	//reads signal that bounces back
-	  duration= pulseIn(echoPin5,HIGH);
+	duration= pulseIn(echoPin5,HIGH);
 	//converts duration to cm using function below 
- 	 cm5 = microsecondsTocm(duration);
-  
-	  digitalWrite(pingPin6, LOW);
-	  delayMicroseconds(2);
-	 digitalWrite(pingPin6, HIGH);
- 	 delayMicroseconds(5);
-	  digitalWrite(pingPin6, LOW); 
-  
+ 	cm5 = microsecondsTocm(duration); 
+	digitalWrite(pingPin6, LOW);
+	delayMicroseconds(2);
+	digitalWrite(pingPin6, HIGH);
+ 	delayMicroseconds(5);
+	digitalWrite(pingPin6, LOW);   
 	//reads signal that bounces back
-	  duration= pulseIn(echoPin6,HIGH);
+	duration= pulseIn(echoPin6,HIGH);
 	//converts duration to cm using function below 
-	  cm6 = microsecondsTocm(duration);
+	cm6 = microsecondsTocm(duration);
 	*/
 	sensory();
 }
@@ -199,11 +190,10 @@ void sensory()
 	//back center
 	mydata.neuron[9].NAgates=160;
 	//if stuck while direction is 0
-	mydata.neuron[10].NAgates=0;
+	mydata.neuron[10].NAgates=200;
 	//if stuck while direction is 1
 	mydata.neuron[10].NAgates=0;
 }
-
 
 //converts ping duration to cm
 long microsecondsTocm(long microseconds)
@@ -211,132 +201,83 @@ long microsecondsTocm(long microseconds)
    return microseconds / 29 / 2; 
 }
 
-
-
-
-
 //manage ion gates manage dendrite's connection
 void synapses()
 {
-		/*sensor neurons
-----------------------------------------------------------------------		
+	//talk about neurotransmitters (modled effect of excite/inhib connections/synapse.
+	//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane		
+	if (mydata.neuron[4].fire==1)
+	{
+		mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+speedexcite;
+		mydata.neuron[3].kgates=mydata.neuron[3].kgates+speedinhibit;
+	}
+	//front left sensor
+	//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
+	if (mydata.neuron[5].fire==1)
+	{
+		mydata.neuron[2].kgates=mydata.neuron[2].kgates+speedinhibit;
+		mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+speedexcite;
+	}
+	//reverse right sensor
+	//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
+	if (mydata.neuron[6].fire==1)
+	{
+		mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+speedexcite;
+		mydata.neuron[3].kgates=mydata.neuron[3].kgates+speedinhibit;
+	}
+	//reverse left sensor
+	//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
+	if (mydata.neuron[7].fire==1)
+	{
+		mydata.neuron[2].kgates=mydata.neuron[2].kgates+speedinhibit;
+		mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+speedexcite;
+	}
 
-		Right and left sensors
-----------------------------------------------------------------------		
-	
-		front right sensor*/
-		//talk about neurotransmitters (modled effect of excite/inhib connections/synapse.
-		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane		
-		if (mydata.neuron[4].fire==1)
-		{
-			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
-		}
-		//front left sensor
-		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
-		if (mydata.neuron[5].fire==1)
-		{
-
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
-		}
-		//reverse right sensor
-		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
-		if (mydata.neuron[6].fire==1)
-		{
-
-			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+200;
-			mydata.neuron[3].kgates=mydata.neuron[3].kgates+5;
-		}
-
-		//reverse left sensor
-		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
-		if (mydata.neuron[7].fire==1)
-		{
-
-			mydata.neuron[2].kgates=mydata.neuron[2].kgates+5;
-			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+200;
-		}
-/*		Front and Reverse Sensors
-------------------------------------------------------------------------------------
-
-		
-
-		Front Sensor*/
-		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
-		if (mydata.neuron[8].fire==1)
-		{
-			mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+160;
-			mydata.neuron[1].kgates=mydata.neuron[1].kgates+25;
-		}
-
-
-		//Reverse Sensor
-		//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane		
-
-		if (mydata.neuron[9].fire==1)
-		{
-			mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+160;
-			mydata.neuron[0].kgates=mydata.neuron[0].kgates+25;
-		}
-
-
-
-
-
-		/*effector neurons
--------------------------------------------------------------------------------------------		
-		
-		Direction Control
-------------------------------------------------------------------------------------------
-
-		Direction neuron forward, inhibits sensor neurons in rear. */
-		//This simulates the effect of an inhibitory neurotransmitter
-		if (DIRECTION==0)
-		{
-			mydata.neuron[6].NAgates=0;
-			mydata.neuron[7].NAgates=0;
-			mydata.neuron[6].kgates=0;
-			mydata.neuron[7].kgates=0;			
-		}	
-		//Direction neuron reverse, inhibits sensor neurons in front.
-		//This simulates the effect of an inhibitory neurotransmitter		
-		if (DIRECTION==1)
-		{
-			mydata.neuron[4].NAgates=0;
-			mydata.neuron[5].NAgates=0;
-			mydata.neuron[4].kgates=0;
-			mydata.neuron[5].kgates=0;			
-		}
-
-
-		/*speed accumulators
------------------------------------------------------------------------------------------------		
-		neuron2 speeda
-		neuron3 speedb
-		*/
-
-/*Neuromodulators
----------------------------------------------------------------------------------------------------
-*/
-		//if the wheel stops (robot is stuck) it tries to fix the situation. 
-		if (mydata.neuron[10].fire==1)	
-		{	
-			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+300;
-			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+300;
-			mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+300;
-		}
-
-		if (mydata.neuron[11].fire==1)	
-		{	
-			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+300;
-			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+300;
-			mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+300;
-		}
+	//Front Sensor*/
+	//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane
+	if (mydata.neuron[8].fire==1)
+	{
+		mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+directionexcite;
+		mydata.neuron[1].kgates=mydata.neuron[1].kgates+directioninhibit;
+	}
+	//Reverse Sensor
+	//This simulates the effect of excititory and inhibitory neurotransmitters on ion channels in the post synaptic membrane		
+	if (mydata.neuron[9].fire==1)
+	{
+		mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+directionexcite;
+		mydata.neuron[0].kgates=mydata.neuron[0].kgates+directioninhibit;
+	}
+	//Neuromodulators 
+	//Direction neuron forward, inhibits sensor neurons in rear. 		
+	//This simulates the effect of an indirect antagonistic neuromodulator closing the NA gates on certain neurons 
+	if (DIRECTION==0)
+	{
+		mydata.neuron[6].NAgates=directionmodulator;
+		mydata.neuron[7].NAgates=directionmodulator;			
+	}	
+	//Direction neuron reverse, inhibits sensor neurons in front.
+	//This simulates the effect of an indirect antagonistic neuromodulator closing the NA gates on certain neurons 		
+	if (DIRECTION==1)
+	{
+		mydata.neuron[4].NAgates=directionmodulator;
+		mydata.neuron[5].NAgates=directionmodulator;			
+	}
+	//if the wheel stops (robot is stuck) it tries to fix the situation. 
+	if (mydata.neuron[10].fire==1)	
+	{	
+		mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+epiexcite;
+		mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+epiexcite;
+		mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+epiexcite;
+		mydata.neuron[0].kgates=mydata.neuron[0].kgates+epiinhibit;
+	}
+	if (mydata.neuron[11].fire==1)	
+	{	
+		mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+epiexcite;
+		mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+epiexcite;
+		mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+epiexcite;
+		mydata.neuron[1].kgates=mydata.neuron[1].kgates+epiinhibit;
+	}
 }
-
-
-
 
 //simulates the sodium potasium pump in the current (i) neuron
 void neuron(int& i)
@@ -351,9 +292,6 @@ void neuron(int& i)
 
 	mydata.neuron[i].NAgates=0;
 	mydata.neuron[i].kgates=0;
-
-	
-
 }
 
 void setconcentration(int& i)
@@ -384,8 +322,6 @@ void pump(int& i)
 	}
 }
 
-
-
 void check(int& i)
 { 
 	//if current neuron fired set fire status to 1 else set to 0 
@@ -401,14 +337,8 @@ void check(int& i)
 		mydata.neuron[i].fire = 0;
 		cout<<"neuron "<<i<<"        charge"<< mydata.neuron[i].concentration/10<<endl;
 	}
-
 				
 }
-
-
-
-
-
 
 /*What happens when different neurons fire
 ------------------------------------------------------------------------------------------*/
