@@ -13,7 +13,7 @@ long cm1, cm2, cm3, cm4, cm5, cm6, voltagea, voltageb;
 
 
 //neuron info
-const int number_of_neurons = 10;
+const int number_of_neurons = 11;
 //the neuron's resting potential -80mv is just 80 for simplicity 
 const int resting_potential = -700;
 //The threshold needed for an action potential 
@@ -59,6 +59,8 @@ void synapses();
 void initneurons();
 //read sensors
 void ping();
+//convert sensory to neural
+void sensory();
 //control motors
 void motorcontrol();
 long microsecondsTocm(long microseconds);
@@ -105,24 +107,6 @@ void initneurons()
 
 void ping()
 {
-	{
-			//front right
-		mydata.neuron[4].NAgates=0;
-		//front leftt
-		mydata.neuron[5].NAgates=0;
-		//back right
-		mydata.neuron[6].NAgates=200;
-		//back lef5
-		mydata.neuron[7].NAgates=87;
-
-		//front cent15
-		mydata.neuron[8].NAgates=0;
-		//back center
-		mydata.neuron[9].NAgates=160;
-		//Wheela motor voltage
-		voltagea=2;
-		//Wheelb motor voltage
-		voltagea=2;
 
 		/*Arduino specific, g++ doesn't understand
 
@@ -197,7 +181,27 @@ void ping()
 	//converts duration to cm using function below 
 	  cm6 = microsecondsTocm(duration);
 	*/
-	}
+	sensory();
+}
+
+void sensory()
+{
+	//front right
+	mydata.neuron[4].NAgates=0;
+	//front leftt
+	mydata.neuron[5].NAgates=0;
+	//back right
+	mydata.neuron[6].NAgates=200;
+	//back lef5
+	mydata.neuron[7].NAgates=87;
+	//front cent15
+	mydata.neuron[8].NAgates=0;
+	//back center
+	mydata.neuron[9].NAgates=160;
+	//if stuck while direction is 0
+	mydata.neuron[10].NAgates=0;
+	//if stuck while direction is 1
+	mydata.neuron[10].NAgates=0;
 }
 
 
@@ -320,14 +324,14 @@ void synapses()
 		{	
 			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+300;
 			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+300;
-			if (DIRECTION==0)
-			{
-				mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+300;
-			}
-			if (DIRECTION==1)
-			{
-				mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+300;
-			}
+			mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+300;
+		}
+
+		if (mydata.neuron[11].fire==1)	
+		{	
+			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+300;
+			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+300;
+			mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+300;
 		}
 }
 
