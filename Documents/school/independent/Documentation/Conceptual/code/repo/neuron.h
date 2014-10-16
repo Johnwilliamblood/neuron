@@ -1,19 +1,19 @@
 /*This library is used to simulate neurons. 
-It requires the use of synapses.h and action.h
-*/
-//libraries
+---------------------------------------------------------------------------------------------------------
+
+libraries*/
 #include <iostream>
 #include <stdlib.h>     
 using namespace std;
 
 
 
-//store distances
-long cm1, cm2, cm3, cm4, cm5, cm6;
+//store sensory info
+long cm1, cm2, cm3, cm4, cm5, cm6, voltagea, voltageb;
 
 
 //neuron info
-const int number_of_neurons = 9;
+const int number_of_neurons = 10;
 //the neuron's resting potential -80mv is just 80 for simplicity 
 const int resting_potential = -700;
 //The threshold needed for an action potential 
@@ -37,6 +37,7 @@ typedef struct _Neuron
 	int fire;
 	int NAgates;
 	int kgates;
+	int epireceptor;
 } NEURON;
 //array of neurons 
 typedef struct _mydata
@@ -63,9 +64,25 @@ void motorcontrol();
 long microsecondsTocm(long microseconds);
 void pump(int& i);
 
+//------------------------------------------------------------------------------------
+
 /*Functions
 --------------------------------------------------------------------------------------*/
 
+//function to set each neuron id, set fire status to 0 and gate open status to 0 
+void init_neuron_data()
+{
+	for (int i=0;i<(number_of_neurons+1);i++)
+	{ 
+		mydata.neuron[i].id=i;
+		mydata.neuron[i].fire=0;
+		mydata.neuron[i].NAgates=0;
+		mydata.neuron[i].kgates=0;
+		mydata.neuron[i].epireceptor=0;
+	}
+	//set resting potential
+	initneurons();
+}
 
 
 void initneurons()
@@ -77,26 +94,10 @@ void initneurons()
 	{
 		mydata.neuron[i].concentration=resting_potential;
 	}
-	
-	//random number time init
-
-	
 }
 
 
-//function to set each neuron id, set fire status to 0 and gate open status to 0 
-void init_neuron_data()
-{
-	for (int i=0;i<(number_of_neurons+1);i++)
-	{ 
-		mydata.neuron[i].id=i;
-		mydata.neuron[i].fire=0;
-		mydata.neuron[i].NAgates=0;
-		mydata.neuron[i].kgates=0;
-	}
-	//set resting potential
-	initneurons();
-}
+
 
 
 
@@ -104,6 +105,7 @@ void init_neuron_data()
 
 void ping()
 {
+	{
 			//front right
 		mydata.neuron[4].NAgates=0;
 		//front leftt
@@ -117,79 +119,85 @@ void ping()
 		mydata.neuron[8].NAgates=0;
 		//back center
 		mydata.neuron[9].NAgates=160;
-/*Arduino specific, g++ doesn't understand
+		//Wheela motor voltage
+		voltagea=2;
+		//Wheelb motor voltage
+		voltagea=2;
 
-//variables 
-  long duration; 
+		/*Arduino specific, g++ doesn't understand
 
-//quick burst of electricity to the proximity sensor to activate it 
-  digitalWrite(pingPin1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin1, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin1, LOW); 
-  
-//reads signal that bounces back
-  duration= pulseIn(echoPin1,HIGH);
-//converts duration to cm using function below 
-  cm1 = microsecondsTocm(duration);
+		//variables 
+		  long duration; 
 
-  digitalWrite(pingPin2, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin2, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin2, LOW); 
+		//quick burst of electricity to the proximity sensor to activate it 
+		  digitalWrite(pingPin1, LOW);
+		  delayMicroseconds(2);
+ 		 digitalWrite(pingPin1, HIGH);
+		  delayMicroseconds(5);
+		  digitalWrite(pingPin1, LOW); 
   
-//reads signal that bounces back
-  duration= pulseIn(echoPin2,HIGH);
-//converts duration to cm using function below 
-  cm2 = microsecondsTocm(duration);
+		//reads signal that bounces back
+		  duration= pulseIn(echoPin1,HIGH);
+		//converts duration to cm using function below 
+ 		 cm1 = microsecondsTocm(duration);
+
+		digitalWrite(pingPin2, LOW);
+ 		 delayMicroseconds(2);
+		  digitalWrite(pingPin2, HIGH);
+ 		 delayMicroseconds(5);
+ 		 digitalWrite(pingPin2, LOW); 
+  
+		//reads signal that bounces back
+  		duration= pulseIn(echoPin2,HIGH);
+	//converts duration to cm using function below 
+ 	 cm2 = microsecondsTocm(duration);
 
 
-  digitalWrite(pingPin3, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin3, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin3, LOW); 
+  	digitalWrite(pingPin3, LOW);
+  	delayMicroseconds(2);
+  	digitalWrite(pingPin3, HIGH);
+  	delayMicroseconds(5);
+  	digitalWrite(pingPin3, LOW); 
   
-//reads signal that bounces back
-  duration= pulseIn(echoPin3,HIGH);
-//converts duration to cm using function below 
-  cm3 = microsecondsTocm(duration);
+	//reads signal that bounces back
+ 	 duration= pulseIn(echoPin3,HIGH);
+	//converts duration to cm using function below 
+ 	 cm3 = microsecondsTocm(duration);
 
-  digitalWrite(pingPin4, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin4, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin4, LOW); 
+ 	 digitalWrite(pingPin4, LOW);
+ 	 delayMicroseconds(2);
+ 	 digitalWrite(pingPin4, HIGH);
+ 	 delayMicroseconds(5);
+ 	 digitalWrite(pingPin4, LOW); 
   
-//reads signal that bounces back
-  duration= pulseIn(echoPin4,HIGH);
-//converts duration to cm using function below 
-  cm4 = microsecondsTocm(duration);
+	//reads signal that bounces back
+ 	 duration= pulseIn(echoPin4,HIGH);
+	//converts duration to cm using function below 
+ 	 cm4 = microsecondsTocm(duration);
   
-  digitalWrite(pingPin5, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin5, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin5, LOW); 
+ 	 digitalWrite(pingPin5, LOW);
+	  delayMicroseconds(2);
+ 	 digitalWrite(pingPin5, HIGH);
+ 	 delayMicroseconds(5);
+ 	 digitalWrite(pingPin5, LOW); 
   
-//reads signal that bounces back
-  duration= pulseIn(echoPin5,HIGH);
-//converts duration to cm using function below 
-  cm5 = microsecondsTocm(duration);
+	//reads signal that bounces back
+	  duration= pulseIn(echoPin5,HIGH);
+	//converts duration to cm using function below 
+ 	 cm5 = microsecondsTocm(duration);
   
-  digitalWrite(pingPin6, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin6, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin6, LOW); 
+	  digitalWrite(pingPin6, LOW);
+	  delayMicroseconds(2);
+	 digitalWrite(pingPin6, HIGH);
+ 	 delayMicroseconds(5);
+	  digitalWrite(pingPin6, LOW); 
   
-//reads signal that bounces back
-  duration= pulseIn(echoPin6,HIGH);
-//converts duration to cm using function below 
-  cm6 = microsecondsTocm(duration);
-*/
+	//reads signal that bounces back
+	  duration= pulseIn(echoPin6,HIGH);
+	//converts duration to cm using function below 
+	  cm6 = microsecondsTocm(duration);
+	*/
+	}
 }
 
 
@@ -206,22 +214,6 @@ long microsecondsTocm(long microseconds)
 //manage ion gates manage dendrite's connection
 void synapses()
 {
-		/*sensor input
-		These are simulated sensors using random number generators
-		by adding or subtracting to each sensor you can see how the
-		robot would react to different sensory input.
-		The randomness is not needed to do this, but makes the results 
-		more interesting to look at.
-
-		Later on the sensor input will be used and converted into 
-		a number within a reasonable range and replace the random number 
-		generators here. 
-		*/
-
-
-
-
-
 		/*sensor neurons
 ----------------------------------------------------------------------		
 
@@ -320,7 +312,23 @@ void synapses()
 		neuron3 speedb
 		*/
 
-
+/*Neuromodulators
+---------------------------------------------------------------------------------------------------
+*/
+		//if the wheel stops (robot is stuck) it tries to fix the situation. 
+		if (mydata.neuron[10].fire==1)	
+		{	
+			mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+300;
+			mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+300;
+			if (DIRECTION==0)
+			{
+				mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+300;
+			}
+			if (DIRECTION==1)
+			{
+				mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+300;
+			}
+		}
 }
 
 
