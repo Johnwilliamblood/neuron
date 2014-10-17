@@ -436,7 +436,7 @@ void death()
 			temp++;
 		}
 	}
-	if (temp==(number_of_neurons+1))
+	if (temp>5)
 	{
 		exit(1);
 	}
