@@ -429,11 +429,11 @@ void fire()
 void death()
 {
 	int temp=0;
-	cout<<"test";
 	for (int i=0;i<(number_of_neurons+1);i++)
 	{
 		if (mydata.neuron[i].state==0)
 		{
+			cout<<"test";
 			temp++;
 		}
 	}
