@@ -22,6 +22,8 @@ int echoPin5 = 31;
 int pingPin6 = 32;
 int echoPin6 = 33;
 
+//output pins
+
 
 for arduino
 void setup() 
@@ -72,6 +74,7 @@ int main()
 		}
 		//fire all active neurons
 		fire();
+		death();
 
 		//one cycle
 	}
