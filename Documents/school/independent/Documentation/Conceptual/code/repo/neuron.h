@@ -294,7 +294,6 @@ void neuron(int& i)
 
 	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
-	death();
 	mydata.neuron[i].NAgates=0;
 	mydata.neuron[i].kgates=0;
 }
@@ -311,7 +310,7 @@ void setconcentration(int& i)
 
 void pump(int& i)
 {
-	if (mydata.neuron[i].state=1)
+	if (mydata.neuron[i].state==1)
 	{
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
 		mydata.neuron[i].atp--;
@@ -328,7 +327,7 @@ void pump(int& i)
 			mydata.neuron[i].concentration=hyperpolarized;
 		}
 	}
-	else
+	if (mydata.neuron[i].atp<1)
 	{
 		mydata.neuron[i].state=0;
 	}
@@ -353,17 +352,7 @@ void check(int& i)
 }
 
 
-void death()
-{
-	for (int i=0;mydata.neuron[i].state==0;i++)
-	{
-		cout<<endl<<"neuron "<<i<<" state: "<<mydata.neuron[i].state<<endl;
-		if (i==number_of_neurons)
-		{
-			exit(1);
-		}
-	}
-}
+
 
 /*What happens when different neurons fire
 ------------------------------------------------------------------------------------------*/
@@ -434,4 +423,13 @@ void fire()
     */
   }
 
-
+void death()
+{
+	for (int i=0;mydata.neuron[i].state==0;i++)
+	{
+	if (i==number_of_neurons)
+		{
+			exit(1);
+		}
+	}
+}
