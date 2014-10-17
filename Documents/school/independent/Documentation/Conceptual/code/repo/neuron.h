@@ -428,11 +428,16 @@ void fire()
 
 void death()
 {
-	for (int i=0;mydata.neuron[i].state==0;i++)
+	int temp=0;
+	for (int i=0;i<(number_of_neurons+1);i++)
 	{
-	if (i==number_of_neurons)
+		if (mydata.neuron[i].state==0)
 		{
-			exit(1);
+			temp++;
 		}
+	}
+	if (temp==(number_of_neurons+1))
+	{
+		exit(1);
 	}
 }
