@@ -301,9 +301,12 @@ void neuron(int& i)
 
 void setconcentration(int& i)
 {
-	//set new concentration based on number of open gates
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].NAgates);
-	mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].kgates);
+	if (mydata.neuron[i].state=1)
+	{
+		//set new concentration based on number of open gates
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].NAgates);
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration-(mydata.neuron[i].kgates);
+	}
 }
 
 void pump(int& i)
