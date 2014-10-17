@@ -313,7 +313,7 @@ void pump(int& i)
 {
 	if (mydata.neuron[i].state=1)
 	{
-		mydata.neuron[i].atp--;
+		
 
 		//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
 		if (mydata.neuron[i].concentration>resting_potential)
