@@ -313,7 +313,6 @@ void pump(int& i)
 	if (mydata.neuron[i].atp<1)
 	{
 		mydata.neuron[i].state=0;
-		cout<<"test";
 	}
 	if (mydata.neuron[i].state==1)
 	{
