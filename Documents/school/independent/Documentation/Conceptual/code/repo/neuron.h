@@ -300,7 +300,7 @@ void neuron(int& i)
 
 void setconcentration(int& i)
 {
-	if (mydata.neuron[i].state=1)
+	if (mydata.neuron[i].state==1)
 	{
 		//set new concentration based on number of open gates
 		mydata.neuron[i].concentration=mydata.neuron[i].concentration+(mydata.neuron[i].NAgates);
