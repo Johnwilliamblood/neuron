@@ -429,7 +429,7 @@ void fire()
 void death()
 {
 	int temp=0;
-	for (int i=0;i<(number_of_neurons+1);i++)
+	for (int i=0;i<number_of_neurons;i++)
 	{
 		if (mydata.neuron[i].state==0)
 		{
