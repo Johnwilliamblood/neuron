@@ -305,23 +305,31 @@ void setconcentration(int& i)
 
 void pump(int& i)
 {
-	mydata.neuron[i].atp--;
-	//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
-	if (mydata.neuron[i].concentration>resting_potential)
+	if (mydata.neuron[i].atp>0)
 	{
-		mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
-	}
+		mydata.neuron[i].atp--;
 
-	//if the concentration is too high ions will leak out. 
-	if (mydata.neuron[i].concentration<resting_potential)
-	{
-		mydata.neuron[i].concentration=mydata.neuron[i].concentration+leakrate;
-	}
+		//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
+		if (mydata.neuron[i].concentration>resting_potential)
+		{
+			mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
+		}
 
-	//This is to limit the number of ions available.
-	if (mydata.neuron[i].concentration<-1000)
+		//if the concentration is too high ions will leak out. 
+		if (mydata.neuron[i].concentration<resting_potential)
+		{
+			mydata.neuron[i].concentration=mydata.neuron[i].concentration+leakrate;
+		}
+
+		//This is to limit the number of ions available.
+		if (mydata.neuron[i].concentration<-1000)
+		{
+			mydata.neuron[i].concentration=hyperpolarized;
+		}
+	}
+	else
 	{
-		mydata.neuron[i].concentration=hyperpolarized;
+		exit(1);
 	}
 }
 
