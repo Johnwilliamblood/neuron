@@ -311,7 +311,7 @@ void setconcentration(int& i)
 
 void pump(int& i)
 {
-	if (mydata.neuron[i].atp>0)
+	if (mydata.neuron[i].state=1)
 	{
 		mydata.neuron[i].atp--;
 
