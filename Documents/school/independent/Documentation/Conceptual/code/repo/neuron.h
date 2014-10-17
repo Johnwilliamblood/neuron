@@ -190,9 +190,9 @@ void sensory()
 	//back center
 	mydata.neuron[9].NAgates=160;
 	//if stuck while direction is 0
-	mydata.neuron[10].NAgates=200;
+	mydata.neuron[10].NAgates=0;
 	//if stuck while direction is 1
-	mydata.neuron[11].NAgates=0;
+	mydata.neuron[11].NAgates=220;
 }
 
 //converts ping duration to cm
