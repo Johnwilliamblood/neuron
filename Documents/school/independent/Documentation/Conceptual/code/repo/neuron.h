@@ -313,15 +313,9 @@ void pump(int& i)
 {
 	if (mydata.neuron[i].state=1)
 	{
+		mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
+		mydata.neuron[i].atp--;
 		
-
-		//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
-		if (mydata.neuron[i].concentration>resting_potential)
-		{
-			mydata.neuron[i].concentration=mydata.neuron[i].concentration-pumprate;
-			mydata.neuron[i].atp--;
-		}
-
 		//if the concentration is too high ions will leak out. 
 		if (mydata.neuron[i].concentration<resting_potential)
 		{
