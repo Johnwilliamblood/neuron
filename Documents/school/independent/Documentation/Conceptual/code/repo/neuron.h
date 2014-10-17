@@ -43,7 +43,7 @@ long  speeda=200, speedb=200, DIRECTION;
 typedef struct _Neuron
 {
 	int id;
-	int atp;
+	long long atp;
 	int concentration;
 	int fire;
 	int NAgates;
@@ -88,7 +88,7 @@ void init_neuron_data()
 	for (int i=0;i<(number_of_neurons+1);i++)
 	{ 
 		mydata.neuron[i].id=i;
-		mydata.neuron[i].atp=50;
+		mydata.neuron[i].atp=999999999999999999;
 		mydata.neuron[i].fire=0;
 		mydata.neuron[i].NAgates=0;
 		mydata.neuron[i].kgates=0;
@@ -306,8 +306,6 @@ void setconcentration(int& i)
 void pump(int& i)
 {
 	mydata.neuron[i].atp--;
-	cout << mydata.neuron[i].atp--;
-	
 	//if the ions are lower than the resting potential pump adds number of ions defined in pumprate
 	if (mydata.neuron[i].concentration>resting_potential)
 	{
