@@ -433,7 +433,7 @@ void death()
 	{
 		if (mydata.neuron[i].state==0)
 		{
-			cout<<"test";
+			cout<<"test"<<endl;
 			temp++;
 		}
 	}
