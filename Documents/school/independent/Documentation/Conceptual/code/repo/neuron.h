@@ -44,6 +44,7 @@ typedef struct _Neuron
 {
 	int id;
 	long long atp;
+	int state;
 	int concentration;
 	int fire;
 	int NAgates;
@@ -76,6 +77,7 @@ void sensory();
 void motorcontrol();
 long microsecondsTocm(long microseconds);
 void pump(int& i);
+void death();
 
 //------------------------------------------------------------------------------------
 
@@ -89,6 +91,7 @@ void init_neuron_data()
 	{ 
 		mydata.neuron[i].id=i;
 		mydata.neuron[i].atp=9999;
+		mydata.neuron[i].state=1;
 		mydata.neuron[i].fire=0;
 		mydata.neuron[i].NAgates=0;
 		mydata.neuron[i].kgates=0;
@@ -291,7 +294,7 @@ void neuron(int& i)
 
 	//check to see if current neuron reached action potential if so, save to mydata fire 
 	check(i);
-
+	death();
 	mydata.neuron[i].NAgates=0;
 	mydata.neuron[i].kgates=0;
 }
@@ -329,7 +332,7 @@ void pump(int& i)
 	}
 	else
 	{
-		exit(1);
+		mydata.neuron[i].state=0;
 	}
 }
 
@@ -349,6 +352,18 @@ void check(int& i)
 		cout<<"neuron "<<i<<"        charge"<< mydata.neuron[i].concentration/10<<endl;
 	}
 				
+}
+
+
+void death()
+{
+	for (int i=0;mydata.neuron[i].state==0;i++)
+	{
+		if (i==number_of_neurons)
+		{
+			exit(1);
+		}
+	}
 }
 
 /*What happens when different neurons fire
