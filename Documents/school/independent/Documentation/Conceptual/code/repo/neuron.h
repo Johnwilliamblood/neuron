@@ -90,7 +90,7 @@ void init_neuron_data()
 	for (int i=0;i<(number_of_neurons+1);i++)
 	{ 
 		mydata.neuron[i].id=i;
-		mydata.neuron[i].atp=9999;
+		mydata.neuron[i].atp=10;
 		mydata.neuron[i].state=1;
 		mydata.neuron[i].fire=0;
 		mydata.neuron[i].NAgates=0;
