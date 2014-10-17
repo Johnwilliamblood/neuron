@@ -111,8 +111,8 @@ void initneurons()
 
 void ping()
 {
-
-	/*Arduino specific, g++ doesn't understand
+	/*
+	//Arduino specific, g++ doesn't understand
 	//variables 
 	long duration; 
 	//quick burst of electricity to the proximity sensor to activate it 
@@ -192,7 +192,7 @@ void sensory()
 	//if stuck while direction is 0
 	mydata.neuron[10].NAgates=200;
 	//if stuck while direction is 1
-	mydata.neuron[10].NAgates=0;
+	mydata.neuron[11].NAgates=0;
 }
 
 //converts ping duration to cm
