@@ -357,6 +357,7 @@ void death()
 {
 	for (int i=0;mydata.neuron[i].state==0;i++)
 	{
+		cout<<endl<<"neuron "<<i<<" state: "<<mydata.neuron[i].state<<endl;
 		if (i==number_of_neurons)
 		{
 			exit(1);
