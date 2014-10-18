@@ -22,8 +22,7 @@ int echoPin5 = 31;
 int pingPin6 = 32;
 int echoPin6 = 33;
 
-int voltageaPin = A0;
-int voltagebPin = A1;
+
 
 //output pins
 int motoraPin = 12;
@@ -37,12 +36,12 @@ int speedbPin = 11;
 
 
 //store sensory info
-long cm1, cm2, cm3, cm4, cm5, cm6, voltagea, voltageb;
+long cm1, cm2, cm3, cm4, cm5, cm6;
 
 int temp=0;
 
 //neuron info
-const int number_of_neurons = 12;
+const int number_of_neurons = 10;
 //the neuron's resting potential -80mv is just 80 for simplicity 
 const int resting_potential = -700;
 //The threshold needed for an action potential 
@@ -55,13 +54,15 @@ const int pumprate = 20;
 const int leakrate = 10;
 
 //Synapse strengths
-const int speedexcite = 250;
-const int speedinhibit = 50;
+const int speedexcite = 300;
+const int speedinhibit = 10;
+const int speedthreshold = 600; //cm
 const int epiexcite = 300;
-const int epiinhibit = 50;
-const int directionexcite = 300;
+const int epiinhibit = 300;
+const int directionexcite = 400; 
 const int directioninhibit = 300;
 const int directionmodulator = 0;
+const int directionthreshold = 40; //cm
 
 
 
@@ -129,10 +130,8 @@ void setup()
   pinMode(echoPin5, INPUT);  
   pinMode(pingPin6, OUTPUT);
   pinMode(echoPin6, INPUT);
-
   //setup neuron array
   init_neuron_data();
-  Serial.begin(9600);
 }
 
 //begin
@@ -167,7 +166,7 @@ void init_neuron_data()
   for (int i=0;i<number_of_neurons;i++)
   { 
     mydata.neuron[i].id=i;
-    mydata.neuron[i].atp=999;
+    mydata.neuron[i].atp=9999999;
     mydata.neuron[i].state=1;
     mydata.neuron[i].fire=0;
     mydata.neuron[i].NAgates=0;
@@ -252,63 +251,43 @@ void ping()
   duration= pulseIn(echoPin6,HIGH);
   //converts duration to cm using function below 
   cm6 = microsecondsTocm(duration);
-
-  voltagea=analogRead(voltageaPin) * (5.0 / 1023);
-
-  voltageb=analogRead(voltagebPin) * (5.0 / 1023);
-
   //convert sensor info to neuron info
   sensory();
 }
 
 void sensory()
 {
-  if (cm2<300)
+  if (cm2<cm3)
   {
     //front right
-    mydata.neuron[4].NAgates=300-cm1;
+    mydata.neuron[7].NAgates=speedexcite;
   }
-  if (cm3<300)
+  if (cm3<cm2)
   {
     //front leftt
-    mydata.neuron[5].NAgates=300-cm2;
+    mydata.neuron[6].NAgates=speedexcite;
   }
-  if (cm5<300)
+  if (cm5<cm6)
   {
     //back right
-    mydata.neuron[6].NAgates=300-cm3;
+    mydata.neuron[5].NAgates=speedexcite;
   }
-  if (cm6<300)
+  if (cm6<cm5)
   {
     //back left
-    mydata.neuron[7].NAgates=300-cm4;
+    mydata.neuron[4].NAgates=speedexcite;
   }
-  if (cm1<40)
+  if (cm1<directionthreshold && cm1<cm4)
   {
     //front center
     mydata.neuron[8].NAgates=directionexcite;
     mydata.neuron[9].kgates=directioninhibit;
   }
-  if (cm4<40)
+  if (cm4<directionthreshold && cm4<cm3)
   {
     //back center
     mydata.neuron[9].NAgates=directionexcite;
     mydata.neuron[8].kgates=directioninhibit;
-  }
-
-
-  if (voltagea<2 || voltageb<2)
-  {
-    if (DIRECTION==HIGH)
-    {
-      //if stuck while direction is 0
-      mydata.neuron[10].NAgates=epiexcite;
-    }
-    if (DIRECTION==LOW)
-    {
-      //if stuck while direction is 1
-      mydata.neuron[11].NAgates=epiexcite;
-    }
   }
 }
 
@@ -378,21 +357,6 @@ void synapses()
   {
     mydata.neuron[4].NAgates=directionmodulator;
     mydata.neuron[5].NAgates=directionmodulator;			
-  }
-  //if the wheel stops (robot is stuck) it tries to fix the situation. 
-  if (mydata.neuron[10].fire==1)	
-  {	
-    mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+epiexcite;
-    mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+epiexcite;
-    mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+epiexcite;
-    mydata.neuron[0].kgates=mydata.neuron[0].kgates+epiinhibit;
-  }
-  if (mydata.neuron[11].fire==1)	
-  {	
-    mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+epiexcite;
-    mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+epiexcite;
-    mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+epiexcite;
-    mydata.neuron[1].kgates=mydata.neuron[1].kgates+epiinhibit;
   }
 }
 
@@ -479,14 +443,14 @@ void fire()
   //Speed pulse rate interpreter 
   if(mydata.neuron[2].fire==1)
   {
-    if(speeda<245) {
-      speeda=speeda++;
+    if(speeda<235) {
+      speeda=speeda+20;
     }
   }
   if(mydata.neuron[2].fire==0)
   {
-    if(speeda>75) {
-      speeda--;
+    if(speeda>100) {
+      speeda=speeda-15;
     }
   }
 
@@ -495,19 +459,17 @@ void fire()
   //Speed pulse rate interpreter
   if(mydata.neuron[3].fire==1)
   {
-    if(speedb<245) {
-      speedb=speedb++;
+    if(speedb<235) {
+      speedb=speedb+20;
     }
   }
   if(mydata.neuron[3].fire==0)
   {
-    if(speedb>75) {
-      speedb--;
+    if(speedb>100) {
+      speedb=speedb-15;
     }
   }
 
-  Serial.println(speeda);
-  Serial.println(speedb);
 
   /*Direction Control
    ------------------------------------------------------------------------------------------*/
@@ -521,9 +483,8 @@ void fire()
     DIRECTION=HIGH;
   }
   motorcontrol();
+
 }
-
-
 
 //motor control
 void motorcontrol()

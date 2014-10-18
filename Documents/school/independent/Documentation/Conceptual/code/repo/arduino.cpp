@@ -56,7 +56,7 @@ const int leakrate = 10;
 
 //Synapse strengths
 const int speedexcite = 300;
-const int speedinhibit = 25;
+const int speedinhibit = 10;
 const int speedthreshold = 600; //cm
 const int epiexcite = 300;
 const int epiinhibit = 300;
@@ -131,7 +131,9 @@ void setup()
   pinMode(echoPin5, INPUT);  
   pinMode(pingPin6, OUTPUT);
   pinMode(echoPin6, INPUT);
-
+  //setup voltage sensor pins
+  pinMode(voltageaPin,INPUT);
+  pinMode(voltageaPin,INPUT);
   //setup neuron array
   init_neuron_data();
   Serial.begin(9600);
@@ -255,9 +257,14 @@ void ping()
   //converts duration to cm using function below 
   cm6 = microsecondsTocm(duration);
 
-  voltagea=analogRead(voltageaPin) * (5.0 / 1023);
+  voltagea=(analogRead(voltageaPin) * (5.0 / 1023));
 
-  voltageb=analogRead(voltagebPin) * (5.0 / 1023);
+  voltageb=(analogRead(voltagebPin) * (5.0 / 1023));
+
+  Serial.println("voltagea:");
+  Serial.println(voltagea);
+  Serial.println("voltageb");
+  Serial.println(voltageb);
 
   //convert sensor info to neuron info
   sensory();
@@ -484,13 +491,13 @@ void fire()
   if(mydata.neuron[2].fire==1)
   {
     if(speeda<235) {
-      speeda=speeda+20;
+      speeda=speeda+10;
     }
   }
   if(mydata.neuron[2].fire==0)
   {
-    if(speeda>50) {
-      speeda=speeda-10;
+    if(speeda>80) {
+      speeda=speeda-5;
     }
   }
 
@@ -500,13 +507,13 @@ void fire()
   if(mydata.neuron[3].fire==1)
   {
     if(speedb<235) {
-      speedb=speedb+20;
+      speedb=speedb+10;
     }
   }
   if(mydata.neuron[3].fire==0)
   {
-    if(speedb>50) {
-      speedb=speeda-10;
+    if(speedb>80) {
+      speedb=speedb-5;
     }
   }
 
@@ -527,9 +534,8 @@ void fire()
     DIRECTION=HIGH;
   }
   motorcontrol();
+
 }
-
-
 
 //motor control
 void motorcontrol()
