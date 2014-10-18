@@ -433,11 +433,10 @@ void death()
 	{
 		if (mydata.neuron[i].state==0)
 		{
-			cout<<"test"<<endl;
 			temp++;
 		}
 	}
-	if (temp>4)
+	if (temp>(number_of_neurons/3))
 	{
 		exit(1);
 	}
