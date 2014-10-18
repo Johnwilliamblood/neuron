@@ -437,7 +437,7 @@ void death()
 			temp++;
 		}
 	}
-	if (temp>5)
+	if (temp>4)
 	{
 		exit(1);
 	}
