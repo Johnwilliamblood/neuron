@@ -11,6 +11,7 @@ using namespace std;
 //store sensory info
 long cm1, cm2, cm3, cm4, cm5, cm6, voltagea, voltageb;
 
+int temp=0;
 
 //neuron info
 const int number_of_neurons = 11;
@@ -428,7 +429,7 @@ void fire()
 
 void death()
 {
-	int temp=0;
+	//see how many neurons are dead
 	for (int i=0;i<number_of_neurons;i++)
 	{
 		if (mydata.neuron[i].state==0)
@@ -436,6 +437,7 @@ void death()
 			temp++;
 		}
 	}
+	//end program if 1/3 of neurons die
 	if (temp>(number_of_neurons/3))
 	{
 		exit(1);
