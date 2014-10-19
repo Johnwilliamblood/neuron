@@ -54,16 +54,20 @@ const int pumprate = 20;
 const int leakrate = 10;
 
 //Synapse strengths
-const int speedexcite = 300;
+const int speedexcite = 250;
 const int speedinhibit = 10;
-const int speedthreshold = 600; //cm
 const int epiexcite = 300;
 const int epiinhibit = 300;
 const int directionexcite = 400; 
 const int directioninhibit = 300;
 const int directionmodulator = 0;
-const int directionthreshold = 40; //cm
 
+//Distance threshold for front/reverse sensor to sense anything
+const int directionthreshold = 20; //cm
+
+//pulse to ppm value
+const int speedincrease = 20;
+const int speeddecrease = 15;
 
 
 //default speed, declare direction variable
@@ -444,13 +448,13 @@ void fire()
   if(mydata.neuron[2].fire==1)
   {
     if(speeda<235) {
-      speeda=speeda+20;
+      speeda=speeda + speedincrease;
     }
   }
   if(mydata.neuron[2].fire==0)
   {
     if(speeda>100) {
-      speeda=speeda-15;
+      speeda=speeda - speeddecrease;
     }
   }
 
@@ -460,13 +464,13 @@ void fire()
   if(mydata.neuron[3].fire==1)
   {
     if(speedb<235) {
-      speedb=speedb+20;
+      speedb=speedb + speedincrease;
     }
   }
   if(mydata.neuron[3].fire==0)
   {
     if(speedb>100) {
-      speedb=speedb-15;
+      speedb=speedb - speeddecrease;
     }
   }
 

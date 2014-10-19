@@ -22,8 +22,7 @@ int echoPin5 = 31;
 int pingPin6 = 32;
 int echoPin6 = 33;
 
-int voltageaPin = A0;
-int voltagebPin = A1;
+
 
 //output pins
 int motoraPin = 12;
@@ -37,12 +36,12 @@ int speedbPin = 11;
 
 
 //store sensory info
-long cm1, cm2, cm3, cm4, cm5, cm6, voltagea, voltageb;
+long cm1, cm2, cm3, cm4, cm5, cm6;
 
 int temp=0;
 
 //neuron info
-const int number_of_neurons = 12;
+const int number_of_neurons = 10;
 //the neuron's resting potential -80mv is just 80 for simplicity 
 const int resting_potential = -700;
 //The threshold needed for an action potential 
@@ -55,16 +54,20 @@ const int pumprate = 20;
 const int leakrate = 10;
 
 //Synapse strengths
-const int speedexcite = 300;
+const int speedexcite = 250;
 const int speedinhibit = 10;
-const int speedthreshold = 600; //cm
 const int epiexcite = 300;
 const int epiinhibit = 300;
 const int directionexcite = 400; 
 const int directioninhibit = 300;
 const int directionmodulator = 0;
-const int directionthreshold = 40; //cm
 
+//Distance threshold for front/reverse sensor to sense anything
+const int directionthreshold = 30; //cm
+
+//pulse to ppm value
+const int speedincrease = 20;
+const int speeddecrease = 15;
 
 
 //default speed, declare direction variable
@@ -131,12 +134,8 @@ void setup()
   pinMode(echoPin5, INPUT);  
   pinMode(pingPin6, OUTPUT);
   pinMode(echoPin6, INPUT);
-  //setup voltage sensor pins
-  pinMode(voltageaPin,INPUT);
-  pinMode(voltageaPin,INPUT);
   //setup neuron array
   init_neuron_data();
-  Serial.begin(9600);
 }
 
 //begin
@@ -256,16 +255,6 @@ void ping()
   duration= pulseIn(echoPin6,HIGH);
   //converts duration to cm using function below 
   cm6 = microsecondsTocm(duration);
-
-  voltagea=(analogRead(voltageaPin) * (5.0 / 1023));
-
-  voltageb=(analogRead(voltagebPin) * (5.0 / 1023));
-
-  Serial.println("voltagea:");
-  Serial.println(voltagea);
-  Serial.println("voltageb");
-  Serial.println(voltageb);
-
   //convert sensor info to neuron info
   sensory();
 }
@@ -303,21 +292,6 @@ void sensory()
     //back center
     mydata.neuron[9].NAgates=directionexcite;
     mydata.neuron[8].kgates=directioninhibit;
-  }
-
-
-  if (voltagea<1 || voltageb<1)
-  {
-    if (DIRECTION==HIGH)
-    {
-      //if stuck while direction is 0
-      mydata.neuron[10].NAgates=epiexcite;
-    }
-    if (DIRECTION==LOW)
-    {
-      //if stuck while direction is 1
-      mydata.neuron[11].NAgates=epiexcite;
-    }
   }
 }
 
@@ -388,23 +362,6 @@ void synapses()
     mydata.neuron[4].NAgates=directionmodulator;
     mydata.neuron[5].NAgates=directionmodulator;			
   }
-/*
-  //if the wheel stops (robot is stuck) it tries to fix the situation. 
-  if (mydata.neuron[10].fire==1)	
-  {	
-    mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+epiexcite;
-    mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+epiexcite;
-    mydata.neuron[1].NAgates=mydata.neuron[1].NAgates+epiexcite;
-    mydata.neuron[0].kgates=mydata.neuron[0].kgates+epiinhibit;
-  }
-  if (mydata.neuron[11].fire==1)	
-  {	
-    mydata.neuron[2].NAgates=mydata.neuron[2].NAgates+epiexcite;
-    mydata.neuron[3].NAgates=mydata.neuron[3].NAgates+epiexcite;
-    mydata.neuron[0].NAgates=mydata.neuron[0].NAgates+epiexcite;
-    mydata.neuron[1].kgates=mydata.neuron[1].kgates+epiinhibit;
-  }
-  */
 }
 
 //simulates the sodium potasium pump in the current (i) neuron
@@ -491,13 +448,13 @@ void fire()
   if(mydata.neuron[2].fire==1)
   {
     if(speeda<235) {
-      speeda=speeda+10;
+      speeda=speeda + speedincrease;
     }
   }
   if(mydata.neuron[2].fire==0)
   {
-    if(speeda>80) {
-      speeda=speeda-5;
+    if(speeda>100) {
+      speeda=speeda - speeddecrease;
     }
   }
 
@@ -507,20 +464,16 @@ void fire()
   if(mydata.neuron[3].fire==1)
   {
     if(speedb<235) {
-      speedb=speedb+10;
+      speedb=speedb + speedincrease;
     }
   }
   if(mydata.neuron[3].fire==0)
   {
-    if(speedb>80) {
-      speedb=speedb-5;
+    if(speedb>100) {
+      speedb=speedb - speeddecrease;
     }
   }
 
-  Serial.println("speeda:");
-  Serial.println(speeda);
-  Serial.println("speedb:");
-  Serial.println(speedb);
 
   /*Direction Control
    ------------------------------------------------------------------------------------------*/
