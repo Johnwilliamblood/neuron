@@ -63,7 +63,7 @@ const int directioninhibit = 300;
 const int directionmodulator = 0;
 
 //Distance threshold for front/reverse sensor to sense anything
-const int directionthreshold = 30; //cm
+const int directionthreshold = 20; //cm
 
 //pulse to ppm value
 const int speedincrease = 20;

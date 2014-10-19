@@ -2,9 +2,9 @@ NEURONAL NETWORK SIMULATION LIBRARY FOR ARDUINO (NNSLA)
 
 Neuronal Network Simulation Library (NNSLA) is an open source c++ library that can be used to simulate neuronal networks. It is scalable and can be easily manipulated to use sensor inputs and motor outputs and create custom neuronal networks. 
 
-
 USEAGE
 
+The arduino.ino is an example of how to implenent this code in an arduino robot. The neuronal circuits and hardware are documented under the documentation folder using xmind files. A similar program using traditional coding methods is included as traditional_algorithm.ino. To use this software on a computer or to develop neuronal circuits neuronphase.cpp and neuron.h can be used.  
 
 CUSTOMIZATION
 
