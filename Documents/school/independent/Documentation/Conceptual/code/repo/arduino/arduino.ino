@@ -38,7 +38,6 @@ int speedbPin = 11;
 //store sensory info
 long cm1, cm2, cm3, cm4, cm5, cm6;
 
-int temp=0;
 
 //neuron info
 const int number_of_neurons = 10;
@@ -83,7 +82,6 @@ typedef struct _Neuron
   int fire;
   int NAgates;
   int kgates;
-  int epireceptor;
 } 
 NEURON;
 //array of neurons 
@@ -170,12 +168,11 @@ void init_neuron_data()
   for (int i=0;i<number_of_neurons;i++)
   { 
     mydata.neuron[i].id=i;
-    mydata.neuron[i].atp=9999999;
+    mydata.neuron[i].atp=999999999999;
     mydata.neuron[i].state=1;
     mydata.neuron[i].fire=0;
     mydata.neuron[i].NAgates=0;
     mydata.neuron[i].kgates=0;
-    mydata.neuron[i].epireceptor=0;
   }
   //set resting potential
   initneurons();
@@ -453,7 +450,7 @@ void fire()
   }
   if(mydata.neuron[2].fire==0)
   {
-    if(speeda>100) {
+    if(speeda>150) {
       speeda=speeda - speeddecrease;
     }
   }
@@ -469,7 +466,7 @@ void fire()
   }
   if(mydata.neuron[3].fire==0)
   {
-    if(speedb>100) {
+    if(speedb>150) {
       speedb=speedb - speeddecrease;
     }
   }

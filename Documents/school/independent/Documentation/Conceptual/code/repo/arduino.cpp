@@ -38,7 +38,6 @@ int speedbPin = 11;
 //store sensory info
 long cm1, cm2, cm3, cm4, cm5, cm6;
 
-int temp=0;
 
 //neuron info
 const int number_of_neurons = 10;
@@ -54,8 +53,8 @@ const int pumprate = 20;
 const int leakrate = 10;
 
 //Synapse strengths
-const int speedexcite = 250;
-const int speedinhibit = 10;
+const int speedexcite = 300;
+const int speedinhibit = 300;
 const int epiexcite = 300;
 const int epiinhibit = 300;
 const int directionexcite = 400; 
@@ -83,7 +82,6 @@ typedef struct _Neuron
   int fire;
   int NAgates;
   int kgates;
-  int epireceptor;
 } 
 NEURON;
 //array of neurons 
@@ -175,7 +173,6 @@ void init_neuron_data()
     mydata.neuron[i].fire=0;
     mydata.neuron[i].NAgates=0;
     mydata.neuron[i].kgates=0;
-    mydata.neuron[i].epireceptor=0;
   }
   //set resting potential
   initneurons();
@@ -261,26 +258,26 @@ void ping()
 
 void sensory()
 {
-  if (cm2<cm3)
-  {
+//  if (cm2<cm3)
+//  {
     //front right
-    mydata.neuron[7].NAgates=speedexcite;
-  }
-  if (cm3<cm2)
-  {
+    mydata.neuron[7].NAgates=speedexcite-cm2;
+//  }
+//  if (cm3<cm2)
+//  {
     //front leftt
-    mydata.neuron[6].NAgates=speedexcite;
-  }
-  if (cm5<cm6)
-  {
+    mydata.neuron[6].NAgates=speedexcite-cm3;
+//  }
+//  if (cm5<cm6)
+//  {
     //back right
-    mydata.neuron[5].NAgates=speedexcite;
-  }
-  if (cm6<cm5)
-  {
+    mydata.neuron[5].NAgates=speedexcite-cm5;
+//  }
+//  if (cm6<cm5)
+//  {
     //back left
-    mydata.neuron[4].NAgates=speedexcite;
-  }
+    mydata.neuron[4].NAgates=speedexcite-cm6;
+//  }
   if (cm1<directionthreshold && cm1<cm4)
   {
     //front center
