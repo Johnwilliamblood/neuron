@@ -54,7 +54,7 @@ const int leakrate = 10;
 
 //Synapse strengths
 const int speedexcite = 250;
-const int speedinhibit = 10;
+const int speedinhibit = 100;
 const int epiexcite = 300;
 const int epiinhibit = 300;
 const int directionexcite = 400; 
@@ -63,10 +63,13 @@ const int directionmodulator = 0;
 
 //Distance threshold for front/reverse sensor to sense anything
 const int directionthreshold = 20; //cm
+const int speedthreshold = 400;
 
 //pulse to ppm value
 const int speedincrease = 20;
 const int speeddecrease = 15;
+const int maxspeed = 235;
+const int minspeed = 150;
 
 
 //default speed, declare direction variable
@@ -258,26 +261,29 @@ void ping()
 
 void sensory()
 {
-  if (cm2<cm3)
-  {
+//  if (cm2<cm3)
+//  {
     //front right
-    mydata.neuron[7].NAgates=speedexcite;
-  }
-  if (cm3<cm2)
-  {
+    mydata.neuron[7].NAgates=speedthreshold-((cm2*speedthreshold)/(cm2+cm3));
+ // }
+//  if (cm3<cm2)
+ // {
     //front leftt
-    mydata.neuron[6].NAgates=speedexcite;
-  }
-  if (cm5<cm6)
-  {
+    mydata.neuron[6].NAgates=speedthreshold-((cm3*speedthreshold)/(cm2+cm3));
+//  }
+//  if (cm5<cm6)
+//  {
     //back right
-    mydata.neuron[5].NAgates=speedexcite;
-  }
-  if (cm6<cm5)
-  {
+    mydata.neuron[5].NAgates=speedthreshold-((cm5*speedthreshold)/(cm5+cm6));
+// }
+ // if (cm6<cm5)
+ // {
     //back left
-    mydata.neuron[4].NAgates=speedexcite;
-  }
+    mydata.neuron[4].NAgates=speedthreshold-((cm6*speedthreshold)/(cm5+cm6));
+ // }
+
+
+
   if (cm1<directionthreshold && cm1<cm4)
   {
     //front center
@@ -444,13 +450,13 @@ void fire()
   //Speed pulse rate interpreter 
   if(mydata.neuron[2].fire==1)
   {
-    if(speeda<235) {
+    if(speeda<maxspeed) {
       speeda=speeda + speedincrease;
     }
   }
   if(mydata.neuron[2].fire==0)
   {
-    if(speeda>150) {
+    if(speeda>minspeed) {
       speeda=speeda - speeddecrease;
     }
   }
@@ -460,13 +466,13 @@ void fire()
   //Speed pulse rate interpreter
   if(mydata.neuron[3].fire==1)
   {
-    if(speedb<235) {
+    if(speedb<maxspeed) {
       speedb=speedb + speedincrease;
     }
   }
   if(mydata.neuron[3].fire==0)
   {
-    if(speedb>150) {
+    if(speedb>minspeed) {
       speedb=speedb - speeddecrease;
     }
   }
