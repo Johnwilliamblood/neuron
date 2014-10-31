@@ -54,7 +54,7 @@ const int leakrate = 10;
 
 //Synapse strengths
 const int speedexcite = 250;
-const int speedinhibit = 100;
+const int speedinhibit = 200;
 const int epiexcite = 300;
 const int epiinhibit = 300;
 const int directionexcite = 400; 
@@ -66,9 +66,9 @@ const int directionthreshold = 20; //cm
 const int speedthreshold = 400;
 
 //pulse to ppm value
-const int speedincrease = 20;
-const int speeddecrease = 15;
-const int maxspeed = 235;
+const int speedincrease = 15;
+const int speeddecrease = 10;
+const int maxspeed = 245;
 const int minspeed = 150;
 
 
@@ -261,26 +261,26 @@ void ping()
 
 void sensory()
 {
-//  if (cm2<cm3)
-//  {
+  if (cm2<cm3)
+  {
     //front right
-    mydata.neuron[7].NAgates=speedthreshold-((cm2*speedthreshold)/(cm2+cm3));
- // }
-//  if (cm3<cm2)
- // {
+    mydata.neuron[7].NAgates=speedexcite;
+  }
+  if (cm3<cm2)
+  {
     //front leftt
-    mydata.neuron[6].NAgates=speedthreshold-((cm3*speedthreshold)/(cm2+cm3));
-//  }
-//  if (cm5<cm6)
-//  {
+    mydata.neuron[6].NAgates=speedexcite;
+  }
+  if (cm5<cm6)
+  {
     //back right
-    mydata.neuron[5].NAgates=speedthreshold-((cm5*speedthreshold)/(cm5+cm6));
-// }
- // if (cm6<cm5)
- // {
+    mydata.neuron[5].NAgates=speedexcite;
+ }
+  if (cm6<cm5)
+  {
     //back left
-    mydata.neuron[4].NAgates=speedthreshold-((cm6*speedthreshold)/(cm5+cm6));
- // }
+    mydata.neuron[4].NAgates=speedexcite;
+  }
 
 
 
