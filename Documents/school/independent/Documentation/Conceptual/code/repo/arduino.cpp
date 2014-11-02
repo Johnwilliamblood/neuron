@@ -1,5 +1,4 @@
 //libraries
-
 #include <stdlib.h>  
 
 //declare sensor pins for arduino
@@ -290,7 +289,7 @@ void sensory()
     mydata.neuron[8].NAgates=directionexcite;
     mydata.neuron[9].kgates=directioninhibit;
   }
-  if (cm4<directionthreshold && cm4<cm3)
+  if (cm4<directionthreshold && cm4<cm1)
   {
     //back center
     mydata.neuron[9].NAgates=directionexcite;

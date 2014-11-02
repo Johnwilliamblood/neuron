@@ -1,5 +1,4 @@
 //libraries
-
 #include <stdlib.h>  
 
 //declare sensor pins for arduino
@@ -69,7 +68,7 @@ const int speedthreshold = 400;
 const int speedincrease = 15;
 const int speeddecrease = 10;
 const int maxspeed = 245;
-const int minspeed = 185;
+const int minspeed = 150;
 
 
 //default speed, declare direction variable
@@ -290,7 +289,7 @@ void sensory()
     mydata.neuron[8].NAgates=directionexcite;
     mydata.neuron[9].kgates=directioninhibit;
   }
-  if (cm4<directionthreshold && cm4<cm3)
+  if (cm4<directionthreshold && cm4<cm1)
   {
     //back center
     mydata.neuron[9].NAgates=directionexcite;
