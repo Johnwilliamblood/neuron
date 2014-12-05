@@ -53,26 +53,25 @@ const int leakrate = 10;
 
 //Synapse strengths
 const int speedexcite = 250;
-const int speedinhibit = 200;
+const int speedinhibit = 100;
 const int epiexcite = 300;
 const int epiinhibit = 300;
 const int directionexcite = 400; 
-const int directioninhibit = 300;
+const int directioninhibit = 250;
 const int directionmodulator = 0;
 
 //Distance threshold for front/reverse sensor to sense anything
-const int directionthreshold = 20; //cm
-const int speedthreshold = 400;
+const int directionthreshold = 25; //cm
 
 //pulse to ppm value
-const int speedincrease = 15;
-const int speeddecrease = 10;
-const int maxspeed = 245;
-const int minspeed = 150;
+const int speedincrease = 10;
+const int speeddecrease = 3;
+const int maxspeed = 200;
+const int minspeed = 100;
 
 
 //default speed, declare direction variable
-long  speeda=200, speedb=200, DIRECTION;
+long  speeda = 200, speedb = 200, DIRECTION;
 
 //setup structs
 typedef struct _Neuron
@@ -280,7 +279,6 @@ void sensory()
     //back left
     mydata.neuron[4].NAgates=speedexcite;
   }
-
 
 
   if (cm1<directionthreshold && cm1<cm4)
@@ -503,11 +501,6 @@ void motorcontrol()
   digitalWrite(motorbBreak, LOW);   //Disengage the Brake for Channel A
   analogWrite(speedbPin, speedb);   //Spins the motor on Channel A at full speed 
 }
-
-
-
-
-
 
 
 
